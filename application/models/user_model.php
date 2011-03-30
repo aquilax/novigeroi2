@@ -1,6 +1,6 @@
 <?php
 
-class User_model extends AQX_Model(){
+class User_model extends AQX_Model{
   
   function register($post){
     
