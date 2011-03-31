@@ -57,6 +57,7 @@ class Base_char_model extends AQX_Model{
       }
 
       $this->db->where('id', $id);
+      $this->db->set($data);
       $this->db->update($this->table_name);
       return TRUE; //updated
     }
