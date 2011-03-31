@@ -35,7 +35,7 @@ class User extends AQX_Controller{
 
   function list_classes(){
     $this->load->model('hero_model');
-    $this->data['heroes'] = $this->hero_model->getHeroClasses();
+    $this->data['classes'] = $this->hero_model->getHeroClasses();
     $this->render();
   }
 

@@ -16,5 +16,5 @@ CREATE TABLE `hero` (
   `_data` mediumtext,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='We need another hero';
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='We need another hero';
 /*!40101 SET character_set_client = @saved_cs_client */;
