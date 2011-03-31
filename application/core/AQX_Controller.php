@@ -7,6 +7,7 @@ class AQX_Controller extends CI_Controller{
 
   protected $logged = TRUE; // FIXME
   protected $user_id = 1; //FIXME
+  protected $hero_id = 2; //FIXME
 
   function __construct(){
     parent::__construct();

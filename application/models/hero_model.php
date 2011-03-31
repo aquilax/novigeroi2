@@ -5,7 +5,7 @@ require_once APPPATH.'/models/base_char_model.php';
 
 class Hero_model extends Base_char_Model{
 
-  private $table_name = 'hero'; //hero's table;
+  protected $table_name = 'hero'; //hero's table;
 
   //List all heroes for user
   public function getHeroes($user_id){
