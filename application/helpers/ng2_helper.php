@@ -10,7 +10,7 @@ function ng2_inc($current, $val, $max = FALSE){
 }
 
 //Decrements a value with optional lower limit;
-function ng2_inc($current, $val, $min = FALSE){
+function ng2_dec($current, $val, $min = FALSE){
   $sum = $current - $val;  
   if ($min !==FALSE){
     return ($sum < $min)?$min:$sum;
