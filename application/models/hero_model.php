@@ -34,7 +34,7 @@ class Hero_model extends Base_char_Model{
     $this->db->set($data); //set the template data;
     $this->db->set('created', 'CURRENT_TIMESTAMP', FALSE);  //set the current timestamp for creation;
     $this->db->insert($this->table_name);
-    return  $this->db->insert_id();
+    return $this->db->insert_id();
   }
 
 }
