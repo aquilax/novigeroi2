@@ -38,7 +38,10 @@ class Base_char_model extends AQX_Model{
   }
 
   public function set($key, $value){
-    $this->update[$key] = $value;
+    $old_val = $this->get($key);
+    if ($old_val === FALSE || $old_val != $value){ // If new column or changed data then add to update
+      $this->update[$key] = $value;
+    }
   }
   
   public function save(){
