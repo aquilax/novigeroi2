@@ -8,7 +8,7 @@ class Hero_model extends Base_char_Model{
   private $table_name = 'hero'; //hero's table;
 
   //List all heroes for user
-  public function listHeroes($user_id){
+  public function getHeroes($user_id){
     $this->db->where('user_id', $user_id);
     $this->db->order_by('created');
     $query = $this->db->get($this->table_name);
@@ -35,6 +35,19 @@ class Hero_model extends Base_char_Model{
     $this->db->set('created', 'CURRENT_TIMESTAMP', FALSE);  //set the current timestamp for creation;
     $this->db->insert($this->table_name);
     return $this->db->insert_id();
+  }
+
+  function getHeroClasses(){
+    $select = array(
+      'id',
+      'name',
+    );
+    $this->db->select($select);
+    $this->where('user_id', 0);
+    $this->where('class', $class_id);
+    $this->db->order_by('created');
+    $query = $this->db->get($this->table_name);
+    return $query->return_array();
   }
 
 }
