@@ -13,6 +13,15 @@ class AQX_Controller extends CI_Controller{
     //$this->output->enable_profiler(TRUE);
   }
 
+  function guard(){
+    if (!$this->logged){
+      $this->status['code'] = '401';
+      $this->status['message'] = 'Unauthorized';
+      $this->render();
+      die();
+    }
+  }
+
   //simple AJAX render
   function render(){
     $data = array(
