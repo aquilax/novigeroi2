@@ -2,7 +2,7 @@
 
 class AQX_Controller extends CI_Controller{
 
-  protected $status = array('code' => 200, 'message' => '');
+  protected $status = array('code' => 200, 'message' => 'OK');
   protected $data = array();
 
   protected $logged = TRUE; // FIXME
@@ -10,7 +10,7 @@ class AQX_Controller extends CI_Controller{
 
   function __construct(){
     parent::__construct();
-    $this->output->enable_profiler(TRUE);
+    //$this->output->enable_profiler(TRUE);
   }
 
   //simple AJAX render
@@ -19,6 +19,7 @@ class AQX_Controller extends CI_Controller{
       'status' => $this->status,
       'data' => $this->data,
     );
+    $this->output->set_status_header($this->status['code'], $this->status['message']);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($data));
   }

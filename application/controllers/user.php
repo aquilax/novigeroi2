@@ -8,25 +8,34 @@ class User extends AQX_Controller{
   }
 
   function login(){
-    //
+    $this->status['code'] = 501;
+    $this->status['message'] = 'Not Implemented';
+    $this->render();
   }
 
   function logout(){
     if ($this->logged()){
       $this->user_model->logout();
-      $this->status = 200;
-      $this->message = 'Logged out';
+      $this->status['message'] = 'Logged out';
     }
     $this->render();
   }
 
   function register(){
-    //
+    $this->status['code'] = 501;
+    $this->status['message'] = 'Not Implemented';
+    $this->render();
   }
 
   function list_heroes(){
     $this->load->model('hero_model');
-    $this->data['heroes'] = $this->hero_model->listHeroes($this->user_id);
+    $this->data['heroes'] = $this->hero_model->getHeroes($this->user_id);
+    $this->render();
+  }
+
+  function list_classes(){
+    $this->load->model('hero_model');
+    $this->data['heroes'] = $this->hero_model->getClasses();
     $this->render();
   }
 
