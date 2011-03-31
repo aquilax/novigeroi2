@@ -13,7 +13,20 @@ class AQX_Controller extends CI_Controller{
     //$this->output->enable_profiler(TRUE);
   }
 
-  function guard(){
+
+  //Poor man's reflection docmentation;
+  function index(){
+    $main_methods = array_values(get_class_methods(__CLASS__));
+    $class_methods = get_class_methods('User');
+    $class_name = $this->router->fetch_directory() . $this->router->fetch_class();
+    foreach ($class_methods as $name){
+      if (!in_array($name, $main_methods)){
+        echo $class_name.'/'.$name.'<br />';
+      }
+    }
+  }
+
+  protected function guard(){
     if (!$this->logged){
       $this->status['code'] = '401';
       $this->status['message'] = 'Unauthorized';
@@ -23,7 +36,7 @@ class AQX_Controller extends CI_Controller{
   }
 
   //simple AJAX render
-  function render(){
+  protected function render(){
     $data = array(
       'status' => $this->status,
       'data' => $this->data,

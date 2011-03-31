@@ -27,13 +27,13 @@ class User extends AQX_Controller{
     $this->render();
   }
 
-  function list_heroes(){
+  function get_heroes(){
     $this->load->model('hero_model');
     $this->data['heroes'] = $this->hero_model->getHeroes($this->user_id);
     $this->render();
   }
 
-  function list_classes(){
+  function get_classes(){
     $this->load->model('hero_model');
     $this->data['classes'] = $this->hero_model->getHeroClasses();
     $this->render();
