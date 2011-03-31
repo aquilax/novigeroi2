@@ -11,7 +11,7 @@ class Base_char_model extends AQX_Model{
 
   private function loadJSON($text){
     $res = json_decode($text, TRUE);
-    if ($res === null ) $res = array()
+    if ($res === null ) $res = array();
     return $res;
   }
 
@@ -41,7 +41,7 @@ class Base_char_model extends AQX_Model{
     $this->update[$key] = $value;
   }
   
-  public save(){
+  public function save(){
     if (count($this->update)){
       $data = array();
       $json = array();
@@ -60,7 +60,7 @@ class Base_char_model extends AQX_Model{
       $this->db->update($this->table_name);
       return TRUE; //updated
     }
-    return FALSE //nothing to update
+    return FALSE; //nothing to update
   }
 }
 
