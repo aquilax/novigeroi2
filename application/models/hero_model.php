@@ -43,11 +43,10 @@ class Hero_model extends Base_char_Model{
       'name',
     );
     $this->db->select($select);
-    $this->where('user_id', 0);
-    $this->where('class', $class_id);
+    $this->db->where('user_id', 0);
     $this->db->order_by('created');
     $query = $this->db->get($this->table_name);
-    return $query->return_array();
+    return $query->result_array();
   }
 
 }
