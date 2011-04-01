@@ -18,7 +18,7 @@ class AQX_Controller extends CI_Controller{
   //Poor man's reflection docmentation;
   function index(){
     $main_methods = array_values(get_class_methods(__CLASS__));
-    $class_methods = get_class_methods('User');
+    $class_methods = get_class_methods($this);
     $class_name = $this->router->fetch_directory() . $this->router->fetch_class();
     foreach ($class_methods as $name){
       if (!in_array($name, $main_methods)){
