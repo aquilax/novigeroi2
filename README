@@ -4,8 +4,7 @@ Novi Geroi 2
 This project has several goals:
 
 - to teach the principles of creating simple PHP browser-bassed game;
-- to create new (decoupled) version of the game Novi Geroi, which currently is
-based on DragonKnight (http://dragon.se7enet.com/dev.php);
+- to create new (decoupled) version of the game Novi Geroi (http://novigeroi.com)
 - to explore some new game design ideas;
 
 The official tutorials (in Bulgarian ) can be found here:
