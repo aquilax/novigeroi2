@@ -1,9 +1,8 @@
 <?php
 
-//this is ugly but I don't know ho to have multiple inheritance in CI;
-require_once APPPATH.'/models/base_char_model.php';
+require_once APPPATH.'core/AQX_Extended_Model.php';
 
-class Hero_model extends Base_char_Model{
+class Hero_model extends AQX_Extended_Model{
 
   protected $table_name = 'hero'; //hero's table;
 

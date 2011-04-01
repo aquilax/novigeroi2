@@ -1,12 +1,11 @@
-<?php 
+<?php
 
-class Base_char_model extends AQX_Model{
-  
+class AQX_Extended_Model extends AQX_Model{
+
   protected $data_key = '_data';
   protected $data = array();
   protected $in_data = array();
   private $update = array();
-
 
   private function loadJSON($text){
     $res = json_decode($text, TRUE);
@@ -19,7 +18,7 @@ class Base_char_model extends AQX_Model{
     if ($this->data){
       if (isset($this->data[$this->data_key])){
         $this->in_data = $this->loadJSON($this->data[$this->data_key]); 
-        unset($this->data[$data_key]);
+        unset($this->data[$this->data_key]);
       }
       return TRUE;
     }
@@ -65,6 +64,7 @@ class Base_char_model extends AQX_Model{
     }
     return FALSE; //nothing to update
   }
+
 }
 
 ?>
