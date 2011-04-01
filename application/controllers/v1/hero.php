@@ -1,6 +1,8 @@
 <?php
 
-class Hero extends AQX_Controller{
+require_once (APPPATH . 'core/AQX_Logged_Controller.php');
+
+class Hero extends AQX_Logged_Controller{
   
   function __construct(){
     parent::__construct();

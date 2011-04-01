@@ -1,6 +1,8 @@
 <?php
 
-class Town extends AQX_Controller{
+require_once (APPPATH . 'core/AQX_InGame_Controller.php');
+
+class Town extends AQX_InGame_Controller{
 
   private $town_id = 0;
 

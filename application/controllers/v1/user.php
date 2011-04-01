@@ -27,19 +27,19 @@ class User extends AQX_Controller{
     $this->render();
   }
 
-  function get_heroes(){
+  function getHeroes(){
     $this->load->model('hero_model');
     $this->data['heroes'] = $this->hero_model->getHeroes($this->user_id);
     $this->render();
   }
 
-  function get_classes(){
+  function getClasses(){
     $this->load->model('hero_model');
     $this->data['classes'] = $this->hero_model->getHeroClasses();
     $this->render();
   }
 
-  function create_hero(){
+  function createHero(){
     $this->load->library('form_validation');
     $this->form_validation->set_rules('name', 'name', 'trim|xss_clean|required|callback__name_check');
     $this->form_validation->set_rules('class_id', 'class', 'trim|required|is_natural_no_zero|callback__class_check');
