@@ -3,6 +3,7 @@
 CREATE TABLE `hero` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
   `exp` int(11) NOT NULL DEFAULT '0',
@@ -16,5 +17,5 @@ CREATE TABLE `hero` (
   `_data` mediumtext,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='We need another hero';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='We need another hero';
 /*!40101 SET character_set_client = @saved_cs_client */;

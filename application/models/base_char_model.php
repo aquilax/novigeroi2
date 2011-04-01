@@ -2,8 +2,7 @@
 
 class Base_char_model extends AQX_Model{
   
-  private $key = 'id';
-  private $data_key = '_data';
+  protected $data_key = '_data';
   protected $data = array();
   protected $in_data = array();
   private $update = array();

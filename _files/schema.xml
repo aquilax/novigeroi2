@@ -32,13 +32,16 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="82" y="23" name="hero">
+</datatypes><table x="81" y="23" name="hero">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
+<row name="class_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
 </row>
@@ -53,7 +56,7 @@
 <default>CURRENT_TIMESTAMP</default></row>
 <row name="last_online" null="1" autoincrement="0">
 <datatype>TIMESTAMP</datatype>
-<default>NULL</default></row>
+<default>'0000-00-00 00:00:00'</default></row>
 <row name="status" null="0" autoincrement="0">
 <datatype>VARCHAR(30)</datatype>
 </row>
@@ -71,7 +74,7 @@
 <default>0</default></row>
 <row name="_data" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
-<default>'{}'</default></row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -81,3 +84,4 @@
 <comment>We need another hero</comment>
 </table>
 </sql>
+

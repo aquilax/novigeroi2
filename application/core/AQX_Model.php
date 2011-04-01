@@ -2,6 +2,9 @@
 
 class AQX_Model extends CI_Model{
 
+  protected $key_name = 'id';
+  public $status = array('code' => 200, 'message' => 'OK');
+
   function __construct(){
     parent::__construct();  
   }

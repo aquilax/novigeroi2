@@ -21,7 +21,7 @@ class AQX_Controller extends CI_Controller{
     $class_methods = get_class_methods($this);
     $class_name = $this->router->fetch_directory() . $this->router->fetch_class();
     foreach ($class_methods as $name){
-      if (!in_array($name, $main_methods)){
+      if (!in_array($name, $main_methods) && $name[0] != '_'){
         echo $class_name.'/'.$name.'<br />';
       }
     }
