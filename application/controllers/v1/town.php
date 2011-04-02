@@ -9,11 +9,16 @@ class Town extends AQX_InGame_Controller{
   function __construct(){
     parent::__construct();
     $this->load->model('town_model');
-    //TODO: get current town here from hero's reff_id
+    $this->town_id = $this->_getTownId();
+  }
+
+  function _getTownId(){
+    //FIXME: get current town here from hero's reff_id
+    return 1;
   }
 
   function getPlaces(){
-    $this->setData('list', $this->town_model->getPlaces($this->town_id));
+    $this->addData('list', $this->town_model->getPlaces($this->town_id));
     $this->render();
   }
 
@@ -24,7 +29,7 @@ class Town extends AQX_InGame_Controller{
       //404 no such place here;
       $this->setStatus(404, 'Place not found');
     } else {
-      $this->setData('data', $data);  
+      $this->addData('data', $data);  
     }
     $this->render();
   }

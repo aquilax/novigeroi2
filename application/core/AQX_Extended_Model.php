@@ -38,6 +38,7 @@ class AQX_Extended_Model extends AQX_Model{
 
   public function set($key, $value){
     $old_val = $this->get($key);
+    //FIXME should also change the original value for next gets
     if ($old_val === FALSE || $old_val != $value){ // If new column or changed data then add to update
       $this->update[$key] = $value;
     }
