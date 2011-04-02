@@ -1,41 +1,18 @@
 <?php
 
-class User extends AQX_Controller{
+require_once APPPATH . 'core/AQX_Logged_Controller.php';
 
-  function __construct(){
-    parent::__construct();
-    $this->load->model('user_model');
-  }
-
-  function login(){
-    $this->status['code'] = 501;
-    $this->status['message'] = 'Not Implemented';
-    $this->render();
-  }
-
-  function logout(){
-    if ($this->logged()){
-      $this->user_model->logout();
-      $this->status['message'] = 'Logged out';
-    }
-    $this->render();
-  }
-
-  function register(){
-    $this->status['code'] = 501;
-    $this->status['message'] = 'Not Implemented';
-    $this->render();
-  }
+class User extends AQX_Logged_Controller{
 
   function getHeroes(){
     $this->load->model('hero_model');
-    $this->data['heroes'] = $this->hero_model->getHeroes($this->user_id);
+    $this->addData('heroes', $this->hero_model->getHeroes($this->user_id));
     $this->render();
   }
 
   function getClasses(){
     $this->load->model('hero_model');
-    $this->data['classes'] = $this->hero_model->getHeroClasses();
+    $this->addData('classes', $this->hero_model->getHeroClasses());
     $this->render();
   }
 
@@ -49,13 +26,15 @@ class User extends AQX_Controller{
       $this->load->model('hero_model');
       $id = $this->hero_model->createHero($this->user_id, $name, $class_id);
       if ($id){
-        $this->data['data'] = array('id' => $id);
+        $this->addData('id', $id);
       } else {
-        $this->status = $this->hero_model->status;  
+        $this->setStatus(
+          $this->hero_model->status['code'], 
+          $this->hero_model->status['message']
+        );
       }
     } else {
-      $this->status['code'] = 400;
-      $this->status['message'] = validation_errors('', "\n");
+      $this->setStatus(400, validation_errors('', "\n"));
     }
     $this->render();
   }
@@ -67,7 +46,6 @@ class User extends AQX_Controller{
   function _class_check($str){
     //TODO Class validation here; 
   }
-
 
 }
 

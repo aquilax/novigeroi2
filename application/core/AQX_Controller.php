@@ -2,18 +2,14 @@
 
 class AQX_Controller extends CI_Controller{
 
-  protected $status = array('code' => 200, 'message' => 'OK');
-  protected $data = array();
+  private $status = array('code' => 200, 'message' => 'OK');
+  private $data = array();
 
-  protected $logged = TRUE; // FIXME
-  protected $user_id = 1; //FIXME
-  protected $hero_id = 2; //FIXME
-
+  
   function __construct(){
     parent::__construct();
     //$this->output->enable_profiler(TRUE);
   }
-
 
   //Poor man's reflection docmentation;
   function index(){
@@ -27,15 +23,6 @@ class AQX_Controller extends CI_Controller{
     }
   }
 
-  protected function guard(){
-    if (!$this->logged){
-      $this->status['code'] = '401';
-      $this->status['message'] = 'Unauthorized';
-      $this->render();
-      die();
-    }
-  }
-
   //simple AJAX render
   protected function render(){
     $data = array(
@@ -45,6 +32,19 @@ class AQX_Controller extends CI_Controller{
     $this->output->set_status_header($this->status['code'], $this->status['message']);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($data));
+  }
+
+  function setStatus($code, $message){
+    $this->status['code'] = $code;
+    $this->status['message'] = $message;
+  }
+
+  function setData($data){
+    $this->data = $data;
+  }
+
+  function addData($key, $val){
+    $this->data[$key] = $val;
   }
 
 }

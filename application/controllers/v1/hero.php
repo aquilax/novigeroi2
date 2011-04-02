@@ -1,8 +1,8 @@
 <?php
 
-require_once (APPPATH . 'core/AQX_Logged_Controller.php');
+require_once (APPPATH . 'core/AQX_InGame_Controller.php');
 
-class Hero extends AQX_Logged_Controller{
+class Hero extends AQX_InGame_Controller{
   
   function __construct(){
     parent::__construct();
@@ -11,10 +11,8 @@ class Hero extends AQX_Logged_Controller{
   }
 
   function getInfo(){
-    $this->data['data'] = array(
-      'name' => $this->hero_model->get('name'),
-      'hp' => $this->hero_model->get('hp'),
-    );
+    $this->addData('name', $this->hero_model->get('name'));
+    $this->addData('hp', $this->hero_model->get('hp'));
     $this->render();
   }
 

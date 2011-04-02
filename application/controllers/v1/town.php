@@ -1,6 +1,6 @@
 <?php
 
-require_once (APPPATH . 'core/AQX_InGame_Controller.php');
+require_once APPPATH . 'core/AQX_InGame_Controller.php';
 
 class Town extends AQX_InGame_Controller{
 
@@ -13,19 +13,18 @@ class Town extends AQX_InGame_Controller{
   }
 
   function getPlaces(){
-    $this->data['data'] = $this->town_model->getPlaces($town_id);
+    $this->setData('list', $this->town_model->getPlaces($this->town_id));
     $this->render();
   }
 
   function getPlace(){
     $place_id = $this->input->post('id');
-    $data = $this->town_model->getPlace($town_id, $place_id);
+    $data = $this->town_model->getPlace($this->town_id, $place_id);
     if (!$data){
       //404 no such place here;
-      $this->status['code'] = 404;
-      $this->status['message'] = 'Place not found';
+      $this->setStatus(404, 'Place not found');
     } else {
-      $this->data['data'] = $data;  
+      $this->setData('data', $data);  
     }
     $this->render();
   }
