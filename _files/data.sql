@@ -24,6 +24,36 @@ LOCK TABLES `hero` WRITE;
 INSERT INTO `hero` VALUES (1,0,1,'Варварин',1,1,'2011-03-31 15:40:36','0000-00-00 00:00:00','home',NULL,1,0,0,'{}'),(2,1,1,'123',1,1,'2011-04-01 04:15:19','0000-00-00 00:00:00','home',NULL,1,0,0,'{}');
 /*!40000 ALTER TABLE `hero` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping data for table `place`
+--
+
+LOCK TABLES `place` WRITE;
+/*!40000 ALTER TABLE `place` DISABLE KEYS */;
+INSERT INTO `place` VALUES (1,1,1,'ЦУМ','Всичко за всеки','2011-04-02 05:50:42','');
+/*!40000 ALTER TABLE `place` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `place_type`
+--
+
+LOCK TABLES `place_type` WRITE;
+/*!40000 ALTER TABLE `place_type` DISABLE KEYS */;
+INSERT INTO `place_type` VALUES (1,'Магазин','store','2011-04-02 05:50:10');
+/*!40000 ALTER TABLE `place_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `town`
+--
+
+LOCK TABLES `town` WRITE;
+/*!40000 ALTER TABLE `town` DISABLE KEYS */;
+INSERT INTO `town` VALUES (1,'Тестопополис','2011-04-02 05:49:02');
+/*!40000 ALTER TABLE `town` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -34,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-04-01 18:14:03
+-- Dump completed on 2011-04-02  8:51:10
