@@ -6,10 +6,12 @@
 cmd:<input name="cmd" value="user/getClasses" id="cmd" />
 data:<input name="data" id="data" />
 <input id="post" type="submit" />
+<div id="msg">
+</div>
 <div id="console" style="font-size:.8em">
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 
 <script>
 
@@ -156,9 +158,11 @@ $base = '/v1/';
 function addNode(req, resp){
   var ts = new Date().toString();
   var el = '<div>['+ts+'] <b>'+req+'</b><br/><pre>'+var_dump(resp)+'</pre></div>';
-  $(el).hide().prependTo('#console').fadeIn('fast');
+  $(el).prependTo('#console');
 }
-
+$("#console").ajaxError(function(event, request, settings, text){
+  $('<div style="color:red">'+request.status+' '+text+' : '+ settings.url + "</div>").prependTo(this);
+});
 $('#post').click(function(event){
   $url = $base + $('#cmd').val();
   $.post($url, $('#data').val(), function(data){
