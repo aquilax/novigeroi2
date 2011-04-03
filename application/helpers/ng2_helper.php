@@ -23,12 +23,17 @@ function ng2_rand($min, $max){
   return mt_rand($min, $max);
 }
 
-function exp2level($exp){
-  return floor($exp^(.5));  
+function exp2level($C, $exp){
+  return floor($exp^(1/$C));  
 }
 
-function level2exp($level){
-  return floor($exp^2);  
+function level2exp($C, $level){
+  return floor($exp^$C);  
+}
+
+//Calcultes max value for level
+function max_change($C1, $C2, $new_level){
+  return floor($new_level*$C1+$C2);
 }
 
 ?>
