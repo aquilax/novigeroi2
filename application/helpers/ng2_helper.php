@@ -32,8 +32,8 @@ function level2exp($C, $level){
 }
 
 //Calcultes max value for level
-function max_change($C1, $C2, $new_level){
-  return floor($new_level*$C1+$C2);
+function max_change($new_level, $C1, $C2){
+  return floor($new_level*$C1)+$C2;
 }
 
 ?>

@@ -57,8 +57,8 @@ class Hero_model extends AQX_Extended_Model{
     $MP_C1 = 1.4;
     $MP_C2 = 4;
     $new_level = exp2level($exp);
-    $this->set('hp_max', max_change($HP_C1, $HP_C2, $new_level));
-    $this->set('mp_max',  max_change($MP_C1, $MP_C2, $new_level));
+    $this->set('hp_max', max_change($new_level, $HP_C1, $HP_C2));
+    $this->set('mp_max',  max_change($new_level, $MP_C1, $MP_C2));
     $this->set('level', $new_level);
     //up the values to the maximum;
     $this->set('hp', $this->get('hp_max'));
