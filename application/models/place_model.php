@@ -1,7 +1,5 @@
 <?php
 
-require_once APPPATH.'core/AQX_Extended_Model.php';
-
 class Place_Model extends AQX_Extended_Model{
 
   protected $table_name = 'place';
@@ -23,7 +21,6 @@ class Place_Model extends AQX_Extended_Model{
     $query = $this->db->get('place p');
     return $query->row_array();
   }
-
 
 }
 

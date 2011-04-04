@@ -1,7 +1,5 @@
 <?php
 
-require_once APPPATH . 'core/AQX_Public_Controller.php';
-
 class Auth extends AQX_Public_Controller{
 
   function __construct(){

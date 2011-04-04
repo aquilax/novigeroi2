@@ -1,7 +1,5 @@
 <?php
 
-require_once APPPATH . 'core/AQX_Logged_Controller.php';
-
 class User extends AQX_Logged_Controller{
 
   function getHeroes(){
