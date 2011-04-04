@@ -21,7 +21,7 @@
 
 LOCK TABLES `hero` WRITE;
 /*!40000 ALTER TABLE `hero` DISABLE KEYS */;
-INSERT INTO `hero` VALUES (1,0,1,'Варварин',1,1,'2011-03-31 15:40:36','0000-00-00 00:00:00','home',NULL,1,0,0,'{}'),(2,1,1,'123',1,1,'2011-04-01 04:15:19','0000-00-00 00:00:00','home',NULL,1,0,0,'{}');
+INSERT INTO `hero` VALUES (1,0,1,'Варварин',1,1,'2011-03-31 15:40:36','0000-00-00 00:00:00','home',NULL,1,0,0,'{}'),(2,1,1,'123',1,1,'2011-04-01 04:15:19','0000-00-00 00:00:00','town',1,1,0,0,'{}'),(3,1,1,'цуцо',1,1,'2011-04-03 04:11:27','0000-00-00 00:00:00','home',NULL,1,0,0,'{}');
 /*!40000 ALTER TABLE `hero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `place` WRITE;
 /*!40000 ALTER TABLE `place` DISABLE KEYS */;
-INSERT INTO `place` VALUES (1,1,1,'ЦУМ','Всичко за всеки','2011-04-02 05:50:42','');
+INSERT INTO `place` VALUES (1,1,1,'ЦУМ','Всичко за всеки','2011-04-02 05:50:42',''),(2,1,2,'ВМА','Лекуваме','2011-04-04 02:39:43','');
 /*!40000 ALTER TABLE `place` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `place_type` WRITE;
 /*!40000 ALTER TABLE `place_type` DISABLE KEYS */;
-INSERT INTO `place_type` VALUES (1,'Магазин','store','2011-04-02 05:50:10');
+INSERT INTO `place_type` VALUES (1,'Магазин','store','2011-04-02 05:50:10'),(2,'Болница','hospital','2011-04-04 02:38:56');
 /*!40000 ALTER TABLE `place_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-04-02  8:51:10
+-- Dump completed on 2011-04-04  6:29:19
