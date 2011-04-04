@@ -21,7 +21,7 @@ class AQX_Extended_Model extends AQX_Model{
         $this->in_data = $this->loadJSON($this->data[$this->data_key]); 
         unset($this->data[$this->data_key]);
       }
-      return TRUE;
+      return $this->data[$this->key_name];
     }
     return FALSE;
   }
@@ -59,9 +59,10 @@ class AQX_Extended_Model extends AQX_Model{
         $data[$this->data_key] = array_merge($this->in_data, $json);
       }
 
-      $this->db->where('id', $id);
+      $this->db->where($this->key_name, $this->data[$this->key_name]);
       $this->db->set($data);
       $this->db->update($this->table_name);
+      $this->update = array();
       return TRUE; //updated
     }
     return FALSE; //nothing to update
