@@ -22,24 +22,23 @@ class Place extends AQX_InTown_Controller{
   }
 
   function hospital(){
-    $place_id = (int)$this->input->post('id');
-    $data = $this->place_model->getPlace($this->town_id, $place_id);
-    if(!$data){
-      //404 no such place here;
+    $place_id = (int)$this->uri->segment(4);
+    $id = $this->place_model->load(array(
+      'town_id' => $this->town_id, 
+      'id' => $place_id));
+    if(!$id){
       $this->setStatus(404, 'Place not found');       
     } else {
-      //FIXME Two queries for one thing;
-      $this->place_model->load($place_id);
-      $this->addData('message', sprintf(lang('Healing costs %d'), $this->place_model->get('price', 10)));
+      $this->addData('message', sprintf(lang('Healing costs %d gold'), $this->place_model->get('price', 10)));
       $this->addData('price', $this->place_model->get('price', 10));
       $this->addAction('town', lang('Back to town'));
-      $this->addAction('town/hospital_heal', lang('Heal'), 'id=%d');
+      $this->addAction('town/hospital_heal/'.$place_id, lang('Heal'));
     }
     $this->render();
   }
 
   function hospital_heal(){
-    $place_id = (int)$this->input->post('id');
+    $place_id = (int)$this->uri->segment(4);
     $id = $this->place_model->load(
       array('town_id' => $this->town_id, 
         'id' => $place_id, 
