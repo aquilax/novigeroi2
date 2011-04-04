@@ -13,7 +13,7 @@ class AQX_InGame_Controller extends AQX_Logged_Controller{
     if (!$this->hero_id){
       $this->guard();  
     }
-    $this->hero_model->load($this->hero_id);
+    $this->hero_model->load(array('id' => $this->hero_id));
   }
 
   private function getHeroId(){

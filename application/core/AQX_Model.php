@@ -9,8 +9,8 @@ class AQX_Model extends CI_Model{
     parent::__construct();  
   }
 
-  function _getRow($id, $table){
-    $this->db->where('id', $id);
+  function _getRow($filter, $table){
+    $this->db->where($filter);
     $this->db->limit(1);
     $query = $this->db->get($table);
     return $query->row_array();

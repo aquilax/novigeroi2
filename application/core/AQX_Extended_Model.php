@@ -13,8 +13,8 @@ class AQX_Extended_Model extends AQX_Model{
     return $res;
   }
 
-  public function load($id){
-    $this->data = $this->_getRow($id, $this->table_name);
+  public function load($filter){
+    $this->data = $this->_getRow($filter, $this->table_name);
     if ($this->data){
       //TODO: Lazy parse the JSON data
       if (isset($this->data[$this->data_key])){
