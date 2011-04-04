@@ -36,4 +36,10 @@ function max_change($new_level, $C1, $C2){
   return floor($new_level*$C1)+$C2;
 }
 
+
+//Dummy translation;
+function lang($text){
+  return $text;
+}
+
 ?>

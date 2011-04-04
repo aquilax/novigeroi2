@@ -4,6 +4,7 @@ class AQX_Controller extends CI_Controller{
 
   private $status = array('code' => 200, 'message' => 'OK');
   private $data = array();
+  private $action = array();
 
   
   function __construct(){
@@ -27,6 +28,7 @@ class AQX_Controller extends CI_Controller{
   protected function render(){
     $data = array(
       'status' => $this->status,
+      'action' => $this->action,
       'data' => $this->data,
     );
     $this->output->set_status_header($this->status['code'], $this->status['message']);
@@ -45,6 +47,14 @@ class AQX_Controller extends CI_Controller{
 
   function addData($key, $val){
     $this->data[$key] = $val;
+  }
+
+  function addAction($controller, $message, $format = ''){
+    $this->action[] = array(
+      'controller' => $controller,
+      'message' => $message,
+      'format' => $format,
+    );
   }
 
 }
