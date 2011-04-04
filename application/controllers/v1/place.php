@@ -1,15 +1,14 @@
 <?php 
 
-require_once APPPATH . 'core/AQX_InGame_Controller.php';
+require_once APPPATH . 'core/AQX_InTown_Controller.php';
 
-class Place extends AQX_InGame_Controller{
+class Place extends AQX_InTown_Controller{
   
   private $hospital_type = 2;
 
   function __construct(){
     parent::__construct();
     $this->load->model('place_model');
-    $this->town_id = $this->_getRefId();
   }
 
   function getPlace(){
