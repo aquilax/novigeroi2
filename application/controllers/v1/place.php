@@ -1,7 +1,5 @@
 <?php 
 
-require_once APPPATH . 'core/AQX_InTown_Controller.php';
-
 class Place extends AQX_InTown_Controller{
   
   private $hospital_type = 2;

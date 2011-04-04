@@ -1,7 +1,5 @@
 <?php
 
-require_once (APPPATH . 'core/AQX_InGame_Controller.php');
-
 class Hero extends AQX_InGame_Controller{
   
   function __construct(){

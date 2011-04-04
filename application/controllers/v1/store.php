@@ -1,7 +1,5 @@
 <?php
 
-require_once APPPATH . 'core/AQX_InTown_Controller.php';
-
 class Store extends AQX_InTown_Controller{
   
   private $store_type = 3;

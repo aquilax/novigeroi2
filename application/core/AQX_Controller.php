@@ -59,4 +59,76 @@ class AQX_Controller extends CI_Controller{
 
 }
 
+
+class AQX_Logged_Controller extends AQX_Controller{
+
+  protected $logged = FAlSE;
+  protected $user_id = -1;
+
+  function __construct(){
+    parent::__construct();
+    $this->loadCredentials();
+    if (!$this->logged){
+      $this->guard();
+    }
+  }
+
+  private function loadCredentials(){
+    //FIXME
+    $this->logged = TRUE;
+    $this->user_id = 1;
+  }
+
+  private function guard(){
+    $this->setStatus('401', 'Unauthorized');
+    $this->render();
+    die('error');//FIXME
+  }
+}
+
+class AQX_InGame_Controller extends AQX_Logged_Controller{
+
+  protected $hero_id = FALSE;
+
+  function __construct(){
+    parent::__construct();
+    $this->load->model('hero_model');
+    $this->hero_id = $this->getHeroId();
+    if (!$this->hero_id){
+      $this->guard();  
+    }
+    $this->hero_model->load(array('id' => $this->hero_id));
+  }
+
+  private function getHeroId(){
+    //FIXME load real hero;
+    return 2; 
+  }
+
+  protected function _getRefId(){
+    return (int)$this->hero_model->get('status_ref_id', 0);  
+  }
+
+}
+
+class AQX_InTown_Controller extends AQX_InGame_Controller{
+  
+  protected $town_id = FALSE;
+
+  function __construct(){
+    parent::__construct();
+    $status = $this->hero_model->get('status');
+    if ($status != 'town'){
+      $this->guard();
+    }
+    $this->town_id = $this->_getRefId(); 
+  }
+
+}
+
+class AQX_Public_Controller extends AQX_Controller{
+  
+}
+
+
 ?>
