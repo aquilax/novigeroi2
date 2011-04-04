@@ -24,7 +24,6 @@ class Place_Model extends AQX_Extended_Model{
     return $query->row_array();
   }
 
-
 }
 
 ?>

@@ -22,7 +22,7 @@ class AQX_InGame_Controller extends AQX_Logged_Controller{
   }
 
   protected function _getRefId(){
-    return $this->hero_model->get('status_ref_id', 0);  
+    return (int)$this->hero_model->get('status_ref_id', 0);  
   }
 
 }

@@ -16,6 +16,11 @@ class AQX_Model extends CI_Model{
     return $query->row_array();
   }
 
+  function _debug($text = FALSE){
+    $text = ($text)?$text:$this->db->last_query();
+    die($text);
+  }
+
 }
 
 ?>
