@@ -1,6 +1,8 @@
 <?php
 
-class Town_Model extends AQX_Model{
+class Town_Model extends AQX_Extended_Model{
+
+  protected $table_name = 'town';
 
   function getPlaces($town_id){
     $select = array(
