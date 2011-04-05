@@ -14,6 +14,31 @@ class Hero extends AQX_InGame_Controller{
     $this->render();
   }
 
+  function inventory(){
+    $this->setStatus(501, 'Not Implemented');
+    $this->render();
+  }
+
+  function equip(){
+    $this->setStatus(501, 'Not Implemented');
+    $this->render();
+  }
+
+  function unequip(){
+    $this->setStatus(501, 'Not Implemented');
+    $this->render();
+  }
+
+  function use(){
+    $this->setStatus(501, 'Not Implemented');
+    $this->render();
+  }
+
+  function drop(){
+    $this->setStatus(501, 'Not Implemented');
+    $this->render();
+  }
+
 }
 
 ?>
