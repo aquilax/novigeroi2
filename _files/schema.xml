@@ -166,7 +166,7 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="item_type" row="id" />
 </row>
-<row name="item_name" null="1" autoincrement="0">
+<row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
 <default>NULL</default></row>
 <row name="mod1_name" null="1" autoincrement="0">

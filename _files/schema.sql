@@ -24,7 +24,7 @@ CREATE TABLE `hero` (
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_type_id` int(11) DEFAULT NULL,
-  `item_name` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
   `mod1_name` varchar(10) DEFAULT NULL,
   `mod1_val` int(11) DEFAULT NULL,
   `mod2_name` varchar(10) DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `item` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `_data` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -43,7 +43,7 @@ CREATE TABLE `item_type` (
   `name` varchar(30) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -65,7 +65,7 @@ CREATE TABLE `place_inventory` (
   `place_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

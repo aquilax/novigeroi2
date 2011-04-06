@@ -79,7 +79,7 @@ class AQX_Logged_Controller extends AQX_Controller{
     $this->user_id = 1;
   }
 
-  private function guard(){
+  protected function guard(){
     $this->setStatus('401', 'Unauthorized');
     $this->render();
     die('error');//FIXME
