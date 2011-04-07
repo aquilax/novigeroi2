@@ -72,6 +72,12 @@
 <row name="map_y" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>0</default></row>
+<row name="gold1" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="gold2" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
 <row name="_data" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>

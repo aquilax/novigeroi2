@@ -14,6 +14,8 @@ CREATE TABLE `hero` (
   `map_id` int(11) NOT NULL DEFAULT '1',
   `map_x` int(11) NOT NULL DEFAULT '0',
   `map_y` int(11) NOT NULL DEFAULT '0',
+  `gold1` int(11) DEFAULT '0',
+  `gold2` int(11) DEFAULT '0',
   `_data` mediumtext,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
