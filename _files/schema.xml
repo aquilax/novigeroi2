@@ -142,7 +142,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="224" y="174" name="place_inventory">
+<table x="660" y="140" name="place_inventory">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -154,6 +154,12 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="item" row="id" />
 </row>
+<row name="gold1" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="gold2" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -194,7 +200,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="657" y="151" name="item_type">
+<table x="660" y="288" name="item_type">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -204,6 +210,28 @@
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR(30)</datatype>
 <default>NULL</default></row>
+<row name="created" null="1" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+<default>CURRENT_TIMESTAMP</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="228" y="166" name="hero_inventory">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="hero_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="hero" row="id" />
+</row>
+<row name="item_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="item" row="id" />
+</row>
+<row name="equipped" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
 <row name="created" null="1" autoincrement="0">
 <datatype>TIMESTAMP</datatype>
 <default>CURRENT_TIMESTAMP</default></row>

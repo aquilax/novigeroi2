@@ -21,6 +21,19 @@ CREATE TABLE `hero` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hero_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hero_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `equipped` int(11) NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `hero_id` (`hero_id`),
+  KEY `item_id` (`item_id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_type_id` int(11) DEFAULT NULL,
@@ -32,7 +45,8 @@ CREATE TABLE `item` (
   `single_use` int(11) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `_data` mediumtext,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `item_type_id` (`item_type_id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -55,7 +69,9 @@ CREATE TABLE `place` (
   `description` varchar(255) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `_data` mediumtext NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `town_id` (`town_id`),
+  KEY `place_type_id` (`place_type_id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -64,7 +80,11 @@ CREATE TABLE `place_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `place_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `gold1` int(11) DEFAULT NULL,
+  `gold2` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `place_id` (`place_id`),
+  KEY `item_id` (`item_id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
