@@ -75,17 +75,21 @@ class Hero_model extends AQX_Extended_Model{
     $query = $this->db->get('place_inventory');
     $item = $query->row_array();
     if (!$item){
-      $this->setStatus(400, 'Item not found');
+      $this->setStatus(404, 'Item not found');
       return FALSE;
     }
+    return $this->_buy($item);
+  }
+
+  function _buy($item){
     $gold1 = $this->get('gold1', 0);
     $gold2 = $this->get('gold2', 0);
     if($gold1 - $item['gold1'] < 0){
-      $this->setStatus(400, 'Gold 1 not found');
+      $this->setStatus(404, 'Gold 1 not found');
       return FALSE;
     }
     if($gold2 - $item['gold2'] < 0){
-      $this->setStatus(400, 'Gold 2 not found');
+      $this->setStatus(404, 'Gold 2 not found');
       return FALSE;
     }
     $data = array(
@@ -101,6 +105,7 @@ class Hero_model extends AQX_Extended_Model{
     }
     $this->setStatus(500, 'Something went wrong');
     return FALSE;
+    
   }
 }
 
