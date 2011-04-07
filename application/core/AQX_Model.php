@@ -91,5 +91,11 @@ class AQX_Extended_Model extends AQX_Model{
     }
     return FALSE; //nothing to update
   }
+
+  function setStatus($code, $message){
+    $this->status['code'] = $code;
+    $this->status['message'] = $message;
+  }
+
 }
 ?>

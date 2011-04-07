@@ -22,8 +22,7 @@ class Hero_model extends AQX_Extended_Model{
     $data = $query->row_array();
     if (!$data){
       //Class Template not found;
-      $this->status['code'] = 400;
-      $this->status['message'] = 'Hero Class not found';
+      $this->setStatus(400, 'Hero Class not found');
       return FALSE;  
     } 
     unset($data[$this->key_name]);
@@ -64,6 +63,45 @@ class Hero_model extends AQX_Extended_Model{
     //Don't forget the new status later;
   }
 
+  function buy_store($place_id, $item_id){
+    $select = array(
+      'item_id',
+      'gold1',
+      'gold2',
+    );
+    $this->db->select($select);
+    $this->db->where('place_id', $place_id);
+    $this->db->where('item_id', $item_id);
+    $query = $this->db->get('place_inventory');
+    $item = $query->row_array();
+    if (!$item){
+      $this->setStatus(400, 'Item not found');
+      return FALSE;
+    }
+    $gold1 = $this->get('gold1', 0);
+    $gold2 = $this->get('gold2', 0);
+    if($gold1 - $item['gold1'] < 0){
+      $this->setStatus(400, 'Gold 1 not found');
+      return FALSE;
+    }
+    if($gold2 - $item['gold2'] < 0){
+      $this->setStatus(400, 'Gold 2 not found');
+      return FALSE;
+    }
+    $data = array(
+      'hero_id' => $this->get('id'),
+      'item_id' => $item['item_id'],
+    );
+    $this->db->set($data);
+    if ($this->db->insert('hero_inventory')){
+      $this->set('gold1', $gold1 - $item['gold1']);
+      $this->set('gold1', $gold2 - $item['gold2']);
+      $this->save();
+      return TRUE;
+    }
+    $this->setStatus(500, 'Something went wrong');
+    return FALSE;
+  }
 }
 
 ?>
