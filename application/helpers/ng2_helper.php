@@ -23,6 +23,11 @@ function ng2_rand($min, $max){
   return mt_rand($min, $max);
 }
 
+//No less than
+function nlt($num, $min){
+  return ($num < $min)?$min:$num;
+}
+
 function exp2level($C, $exp){
   return floor($exp^(1/$C));  
 }

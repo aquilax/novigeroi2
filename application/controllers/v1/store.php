@@ -35,7 +35,11 @@ class Store extends AQX_InTown_Controller{
   }
 
   function sell(){
-    $this->setStatus(501, 'Not Implemented');
+    $inventory_id = (int)$this->uri->segment(5);
+    $store_margin = (float)$this->store_model->get('margin', .8);
+    $this->hero_model->sell_store($store_margin, $inventory_id);
+    $this->setStatus($this->hero_model->status['code'],
+      $this->hero_model->status['message']);
     $this->render();
   }
 
