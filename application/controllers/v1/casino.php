@@ -3,13 +3,13 @@
 class Casino extends AQX_InTown_Controller{
 
   private $place_type_id = 3;
-  private $place_id = 3;
+  private $place_id = 0;
 
   function __construct(){
     parent::__construct();
     $this->load->model('casino_model');
     $this->place_id = (int)$this->uri->segment(4);
-    $id = $this->store_model->load(array('id' => $this->place_id, 
+    $id = $this->casino_model->load(array('id' => $this->place_id, 
       'town_id' => $this->town_id,
       'place_type_id' => $this->place_type_id));
     if (!$id){

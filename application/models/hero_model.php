@@ -157,14 +157,14 @@ class Hero_model extends AQX_Extended_Model{
     if ($dice < $chance){
       $win = $bet;
       $this->set('gold1', $gold1 + $win);
-      return array('message' => sprintf(lang('You win %d gold'), $win));
+      $this->save();
+      return array('message' => sprintf(lang('You won %d gold'), ($win*2)));
     } else {
       $this->set('gold1', $gold1 - $bet);
+      $this->save();
       return array('message' => sprintf(lang('You lost %d gold'), $bet));
     }
   }
-
-
 }
 
 ?>
