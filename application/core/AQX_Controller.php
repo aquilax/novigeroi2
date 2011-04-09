@@ -17,11 +17,14 @@ class AQX_Controller extends CI_Controller{
     $main_methods = array_values(get_class_methods(__CLASS__));
     $class_methods = get_class_methods($this);
     $class_name = $this->router->fetch_directory() . $this->router->fetch_class();
+    $methods = array();
     foreach ($class_methods as $name){
       if (!in_array($name, $main_methods) && $name[0] != '_'){
-        echo $class_name.'/'.$name.'<br />';
+        $methods[] = $class_name.'/'.$name;
       }
     }
+    $this->addData('methods', $methods);
+    $this->render();
   }
 
   //simple AJAX render
@@ -69,7 +72,7 @@ class AQX_Logged_Controller extends AQX_Controller{
     parent::__construct();
     $this->loadCredentials();
     if (!$this->logged){
-      $this->guard();
+      $this->_guard();
     }
   }
 
@@ -79,7 +82,7 @@ class AQX_Logged_Controller extends AQX_Controller{
     $this->user_id = 1;
   }
 
-  protected function guard(){
+  protected function _guard(){
     $this->setStatus('401', 'Unauthorized');
     $this->render();
     die('error');//FIXME
@@ -95,7 +98,7 @@ class AQX_InGame_Controller extends AQX_Logged_Controller{
     $this->load->model('hero_model');
     $this->hero_id = $this->getHeroId();
     if (!$this->hero_id){
-      $this->guard();  
+      $this->_guard();  
     }
     $this->hero_model->load(array('id' => $this->hero_id));
   }
@@ -119,7 +122,7 @@ class AQX_InTown_Controller extends AQX_InGame_Controller{
     parent::__construct();
     $status = $this->hero_model->get('status');
     if ($status != 'town'){
-      $this->guard();
+      $this->_guard();
     }
     $this->town_id = $this->_getRefId(); 
   }

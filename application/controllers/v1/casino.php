@@ -13,7 +13,7 @@ class Casino extends AQX_InTown_Controller{
       'town_id' => $this->town_id,
       'place_type_id' => $this->place_type_id));
     if (!$id){
-      $this->guard();
+      $this->_guard();
     }
   }
  
