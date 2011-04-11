@@ -1,5 +1,17 @@
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bank_transaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hero_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `operation_type_id` int(11) DEFAULT NULL,
+  `gold1` int(11) DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hero` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -60,6 +72,14 @@ CREATE TABLE `item_type` (
   `hero_slot_id` int(11) DEFAULT '0',
   `name` varchar(30) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `operation_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
