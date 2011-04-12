@@ -27,9 +27,9 @@ class AQX_Model extends CI_Model{
 class AQX_Extended_Model extends AQX_Model{
 
   protected $data_key = '_data';
-  protected $all_data = array();
-  protected $out_data = array();
-  protected $in_data = array();
+  protected $data = array();
+  protected $db_keys = array();
+  protected $json_keys = array();
   private $update = array();
 
   private function loadJSON($text){
@@ -39,27 +39,35 @@ class AQX_Extended_Model extends AQX_Model{
   }
 
   public function load($filter){
-    $this->out_data = $this->_getRow($filter, $this->table_name);
-    if ($this->out_data){
-      if (isset($this->out_data[$this->data_key])){
-        $this->in_data = $this->loadJSON($this->out_data[$this->data_key]); 
-        unset($this->out_data[$this->data_key]);
+    $all = $this->_getRow($filter, $this->table_name);
+    $json = array();
+    if ($all){
+      if (isset($all[$this->data_key])){
+        $json = $this->loadJSON($all[$this->data_key]); 
+        unset($all[$this->data_key]);
       }
-      $this->all_data = array_merge($this->in_data, $this->out_data);
-      return $this->all_data[$this->key_name];
+      $this->data = array_merge($json, $all);
+      
+      //Get the keys
+      $this->db_keys = array_keys($all);
+      unset($all);
+      $this->json_keys = array_keys($json);
+      unset($json);
+      
+      return $this->data[$this->key_name];
     }
     return FALSE;
   }
 
   public function get($key, $default = FALSE){
-    if (isset($this->all_data[$key])){
-      return $this->all_data[$key];
+    if (isset($this->data[$key])){
+      return $this->data[$key];
     }
     return $default;
   }
 
   public function get_array(){
-    return $this->all_data;  
+    return $this->data;  
   }
 
   public function set_array($data){
@@ -71,7 +79,7 @@ class AQX_Extended_Model extends AQX_Model{
   public function set($key, $value){
     $old_val = $this->get($key);
     if ($old_val === FALSE || $old_val != $value){ // If new column or changed data then add to update
-      $this->all_data[$key] = $value;
+      $this->data[$key] = $value;
       $this->update[$key] = $value;
     }
   }
@@ -81,17 +89,22 @@ class AQX_Extended_Model extends AQX_Model{
       $data = array();
       $json = array();
       foreach($this->update as $key => $val){
-        if (isset($this->out_data[$key])){
+        if (in_array($key, $this->db_keys)){
           $data[$key] = $val;
         } else {
           $json[$key] = $val;
         }
       }
       if ($json){
-        $data[$this->data_key] = array_merge($this->in_data, $json);
+        $ja = array();
+        foreach($this->json_keys as $name){
+          $ja[$name] = $this->get($name);
+        }
+        //The merge here is not really necessary;
+        $data[$this->data_key] = json_encode(array_merge($ja, $json));
       }
 
-      $this->db->where($this->key_name, $this->out_data[$this->key_name]);
+      $this->db->where($this->key_name, $this->data[$this->key_name]);
       $this->db->set($data);
       $this->db->update($this->table_name);
       $this->update = array();
