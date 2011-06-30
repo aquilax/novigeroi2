@@ -1,1 +1,0 @@
-../../lib/ci2/index.php
