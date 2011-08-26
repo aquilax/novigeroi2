@@ -29,7 +29,14 @@ class Casino extends AQX_InTown_Controller{
     $this->addData('description', $this->casino_model->get('description'));
     $this->addData('max_bet', $max_bet);
     
-    $this->addAction('casino/head_tails_bet/'.$this->place_id.'/1', lang('Bet'));
+    $max_bet = $this->casino_model->get('max_bet', 10);
+    $n = (int)($max_bet /5);
+    $sec = $max_bet/$n;
+    for ($i = 1; $i < $sec; $i++){
+      $this->addAction('casino/head_tails_bet/'.$this->place_id.'/'.$n*$i, sprintf(lang('Bet %d gold'), $n*$i));
+    }
+    $this->addAction('casino/head_tails_bet/'.$this->place_id.'/'.$max_bet, sprintf(lang('Bet %d gold'), $max_bet));
+    $this->addAction('casino/show/'.$this->place_id, lang('Back to casino'));
     $this->addAction('town', lang('Back to town'));        
     $this->render();
   }
@@ -51,6 +58,7 @@ class Casino extends AQX_InTown_Controller{
           $this->hero_model->status['message']);
       }
     }
+    $this->addAction('casino/head_tails/'.$this->place_id, lang('Bet again'));
     $this->addAction('casino/show/'.$this->place_id, lang('Back to casino'));
     $this->addAction('town', lang('Back to town'));
     $this->render();

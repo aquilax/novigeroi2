@@ -18,6 +18,7 @@ class Hero_model extends AQX_Extended_Model{
         'level' => 1,
         'status' => 'town',
         'status_ref_id' => 1,
+        'gold1' => 200,
         'map_id' => 1,
         'map_x' => 1,
         'map_y' => 1,
