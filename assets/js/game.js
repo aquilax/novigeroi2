@@ -1,18 +1,21 @@
 var Game = (function(){
   
   var log_div = null;
+  var load_div = null;
+  var actions_div = null;
+  var name_div = null;
   
   function wait(show){
     if (show){
-      $('#load').show();
+      load_div.show();
     } else {
-      $('#load').hide();
+      load_div.hide();
     }
   }
   
   function get(url) {
     wait(true);
-    $.get(url, processData, 'json');
+    $.get(url, processResponse, 'json');
   }
 
   function recp(data){
@@ -28,7 +31,8 @@ var Game = (function(){
   }
 
   function log(data) {
-    log_div.prepend(recp(data)+'<br/>');
+    var ts = new Date().toString();
+    log_div.prepend('['+ts+'] '+recp(data)+'<br/>');
   }
 
   function processActions(action) {
@@ -36,20 +40,37 @@ var Game = (function(){
     for (var i in action){
       t += '<a href='+action[i].controller+'>'+action[i].message+'</a><br />';
     }
-    $('#actions').html(t);
+    actions_div.html(t);
   }
 
-  function processData(raw) {
+  function processData(data) {
+    if (data.name){
+      name_div.html(data.name);
+    }
+  }
+
+  function processResponse(raw) {
     log(raw);
+    if (raw.redirect){
+      get(raw.redirect);
+      return;
+    }
     if (raw.action){
       processActions(raw.action)
     }
+    if (raw.data){
+      processData(raw.data)
+    }    
     wait(false);
   }
 
   function initGame(){
-    get('/v1/town/getPlaces');
     log_div = $('#log');
+    actions_div = $('#actions');
+    load_div = $('#load');
+    name_div = $('#title');
+    //get in the action
+    get('/v1/game');
   }
     
   function handleAnchors (event) {

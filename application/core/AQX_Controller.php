@@ -35,11 +35,18 @@ class AQX_Controller extends CI_Controller{
       'action' => $this->action,
       'data' => $this->data,
     );
+    $this->_beforeRender();
     $this->output->set_status_header($this->status['code'], $this->status['message']);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($data));
   }
 
+  function redirect($controller){
+    $this->_beforeRender();
+    $this->output->set_content_type('application/json');
+    $this->output->set_output(json_encode(array('redirect' => $this->prefix.$controller)));
+  }  
+  
   function setStatus($code, $message){
     $this->status['code'] = $code;
     $this->status['message'] = $message;
@@ -60,7 +67,6 @@ class AQX_Controller extends CI_Controller{
       'format' => $format,
     );
   }
-
 }
 
 
@@ -77,7 +83,7 @@ class AQX_Logged_Controller extends AQX_Controller{
       $this->_guard();
     }
   }
-
+  
   private function loadCredentials(){
     //FIXME
     $this->logged = TRUE;
@@ -114,6 +120,9 @@ class AQX_InGame_Controller extends AQX_Logged_Controller{
     return (int)$this->hero_model->get('status_ref_id', 0);  
   }
 
+  protected function _beforeRender(){
+    $this->hero_model->save();
+  }
 }
 
 class AQX_InTown_Controller extends AQX_InGame_Controller{
