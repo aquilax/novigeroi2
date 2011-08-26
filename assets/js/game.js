@@ -15,8 +15,20 @@ var Game = (function(){
     $.get(url, processData, 'json');
   }
 
+  function recp(data){
+    var t = '';
+    if (typeof(data) == 'object'){
+      $.each(data, function(i, val) {
+        t += ('<b>'+i+"</b> : {" + recp(val)+"} ");
+      });
+    } else {
+      t = data;
+    }
+    return t;
+  }
+
   function log(data) {
-    log_div.prepend(data+'<br/>');
+    log_div.prepend(recp(data)+'<br/>');
   }
 
   function processActions(action) {
