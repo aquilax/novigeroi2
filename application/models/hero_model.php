@@ -6,12 +6,30 @@ class Hero_model extends AQX_Extended_Model{
 
   //FIXME db
   function load(){
-    $this->data = array(
-      'id' => 1,
-      'status' => 'town',
-      'status_ref_id' => 1,
-    );
-    return 1;
+    $this->data = $this->session->userdata($this->table_name);
+    if (!$this->data) {
+      $this->data = array(
+        'id' => 1,
+        'user_id' => 1,
+        'class_id' => 1,
+        'name' => 'цецо',
+        'exp' => '3',
+        'last_online' => 0,
+        'level' => 1,
+        'status' => 'town',
+        'status_ref_id' => 1,
+        'map_id' => 1,
+        'map_x' => 1,
+        'map_y' => 1,
+      );
+      return 1;
+    }
+    return $this->data['id'];
+  }
+  
+  //FIXME db
+  function save(){
+    $this->session->set_userdata($this->table_name, $this->data);
   }
   
   
