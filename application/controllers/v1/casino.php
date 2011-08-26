@@ -17,11 +17,20 @@ class Casino extends AQX_InTown_Controller{
     }
   }
  
+  function show(){
+    $this->addAction('casino/head_tails/'.$this->place_id, lang('Head or tails'));
+    $this->addAction('town', lang('Back to town'));    
+    $this->render();
+  }
+  
   function head_tails(){
     $max_bet = $this->casino_model->get('max_bet', 10);
-    $this->addData('title', $this->casino_model->get('title'));
-    $this->addData('desc', $this->casino_model->get('description'));
+    $this->addData('name', $this->casino_model->get('title'));
+    $this->addData('description', $this->casino_model->get('description'));
     $this->addData('max_bet', $max_bet);
+    
+    $this->addAction('casino/head_tails_bet/'.$this->place_id.'/1', lang('Bet'));
+    $this->addAction('town', lang('Back to town'));        
     $this->render();
   }
 
@@ -34,15 +43,16 @@ class Casino extends AQX_InTown_Controller{
     } elseif ($bet < 1) {
       $this->setStatus(500, 'Bet underflow');
     } else {
-      $data = $this->hero_model->bet($bet, $chance);
+      $data = $this->casino_model->bet($bet, $chance);
       if ($data){
         $this->setData($data);
       } else {
         $this->setStatus($this->hero_model->status['code'],
           $this->hero_model->status['message']);
       }
-
     }
+    $this->addAction('casino/show/'.$this->place_id, lang('Back to casino'));
+    $this->addAction('town', lang('Back to town'));
     $this->render();
   }
 

@@ -7,7 +7,11 @@ class Store_Model extends AQX_Extended_Model{
   //FIXME db
   function load($id) {
     $this->data = array(
-        
+      'id' => 1,
+      'town_id' => 1,
+      'place_type_id' => 1,
+      'name' => 'ЦУМ',
+      'description' => 'Всичко за всеки'
     );
     return 1;
   }

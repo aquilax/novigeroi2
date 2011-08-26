@@ -223,26 +223,8 @@ class Hero_model extends AQX_Extended_Model{
     }
     $this->setStatus(500, 'Something went wrong');
     return FALSE;
-  }    
-
-  function bet($bet, $chance){
-    $gold1 = $this->get('gold1', 0);
-    if (($gold1 - $bet) < 0){
-      $this->setStatus(500, 'Not enough money');
-      return FALSE;
-    }
-    $dice = ng2_rand(0, 100);
-    if ($dice < $chance){
-      $win = $bet;
-      $this->set('gold1', $gold1 + $win);
-      $this->save();
-      return array('message' => sprintf(lang('You won %d gold'), ($win*2)));
-    } else {
-      $this->set('gold1', $gold1 - $bet);
-      $this->save();
-      return array('message' => sprintf(lang('You lost %d gold'), $bet));
-    }
   }
+
 }
 
 ?>

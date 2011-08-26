@@ -60,10 +60,10 @@ class Place extends AQX_InTown_Controller{
           $this->hero_model->set('gold', $this->hero_model->get('gold')-$price);
           $this->hero_model->save();
           $this->addData('message', lang('Healed'));
-          $this->addAction('town', lang('Back to town'));
         }
       }
     }
+    $this->addAction('town', lang('Back to town'));    
     $this->render();
   }
  
