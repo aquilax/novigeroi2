@@ -16,7 +16,7 @@ var Game = (function(){
   }
 
   function log(data) {
-    log_div.append(data);
+    log_div.prepend(data+'<br/>');
   }
 
   function processActions(action) {
@@ -58,4 +58,7 @@ var Game = (function(){
 $(document).ready(function(){
   $("a").live('click', Game.handleAnchors);
   Game.init();
+  $("#log").ajaxError(function(event, request, settings){
+    $(this).prepend("Error requesting page " + settings.url + "<br />");
+  });
 });
