@@ -3,7 +3,9 @@ var Game = (function(){
   var log_div = null;
   var load_div = null;
   var actions_div = null;
+  var hero_div = null;
   var name_div = null;
+  var main_div = null;
   
   function wait(show){
     if (show){
@@ -43,9 +45,21 @@ var Game = (function(){
     actions_div.html(t);
   }
 
+  function processHero(hero){
+    var t = '<table>';
+    $.each(hero, function(i, val) {
+      t += '<tr><td>'+i+'</td><td>'+val+'</td></tr>';
+    });
+    t += '</table>';
+    hero_div.html(t);    
+  }
+
   function processData(data) {
     if (data.name){
       name_div.html(data.name);
+    }
+    if (data.description){ 
+      main_div.html(data.description);
     }
   }
 
@@ -60,6 +74,9 @@ var Game = (function(){
     }
     if (raw.data){
       processData(raw.data)
+    }
+    if (raw.hero){
+      processHero(raw.hero)
     }    
     wait(false);
   }
@@ -67,6 +84,8 @@ var Game = (function(){
   function initGame(){
     log_div = $('#log');
     actions_div = $('#actions');
+    hero_div = $('#hero');
+    main_div = $('#main');
     load_div = $('#load');
     name_div = $('#title');
     //get in the action

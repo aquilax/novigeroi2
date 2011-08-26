@@ -5,6 +5,7 @@ class AQX_Controller extends CI_Controller{
   private $status = array('code' => 200, 'message' => 'OK');
   private $data = array();
   private $action = array();
+  private $hero = array();
   protected $prefix = '';
 
   
@@ -30,17 +31,18 @@ class AQX_Controller extends CI_Controller{
 
   //simple AJAX render
   protected function render(){
+    $this->_beforeRender();
     $data = array(
       'status' => $this->status,
       'action' => $this->action,
       'data' => $this->data,
     );
-    $this->_beforeRender();
+    $this->fillHero(&$data);
     $this->output->set_status_header($this->status['code'], $this->status['message']);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($data));
   }
-
+  
   function redirect($controller){
     $this->_beforeRender();
     $this->output->set_content_type('application/json');
@@ -120,6 +122,10 @@ class AQX_InGame_Controller extends AQX_Logged_Controller{
     return (int)$this->hero_model->get('status_ref_id', 0);  
   }
 
+  protected function fillHero($data){
+    $data['hero'] = $this->hero_model->get_array();
+  }
+  
   protected function _beforeRender(){
     $this->hero_model->save();
   }

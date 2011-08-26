@@ -9,7 +9,7 @@ class Town_Model extends AQX_Extended_Model{
     $this->data = array(
       'id' => '1',
       'name' => 'Тестопополис',
-      'description' => '',
+      'description' => 'Описание на списание',
     );
     return $this->data['id'];
   }  
