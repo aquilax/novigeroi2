@@ -61,6 +61,9 @@ var Game = (function(){
     if (data.description){ 
       main_div.html(data.description);
     }
+    if (data.message){ 
+      main_div.html(data.message);
+    }    
   }
 
   function processResponse(raw) {

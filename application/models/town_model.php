@@ -36,6 +36,15 @@ class Town_Model extends AQX_Extended_Model{
         'place_type_name' => 'Лечебница',
         'controller' => 'place/hospital',
       ),
+      2 => 
+      array (
+        'town_id' => '1',
+        'id' => '3',
+        'name' => 'Казно',
+        'place_type_id' => '3',
+        'place_type_name' => 'Казино',
+        'controller' => 'casino/show',
+      ),        
     );    
     
     

@@ -14,7 +14,7 @@ class Bank extends AQX_InTown_Controller{
     }
   }
 
-  function info(){
+  function index(){
     $this->addData('name', $this->bank_model->get('name'));
     $this->addData('description', $this->bank_model->get('description'));
     $this->addAction('bank/transactions', lang('Transactions'));

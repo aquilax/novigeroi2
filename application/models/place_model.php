@@ -8,12 +8,13 @@ class Place_Model extends AQX_Extended_Model{
   //FIXME db
   function load ($id) {
     $this->data = array(
-      'id' => 1,
+      'id' => 2,
       'town_id' => 1,
       'place_type_id' => 1,
-      'name' => 'Име на място',
-      'description' => 'Описание на място',
+      'name' => 'ВМА',
+      'description' => 'Болница на края на града',
     );
+    return 2;
   }
   
   function getPlace($town_id, $place_id){
