@@ -17,6 +17,10 @@ class Store extends AQX_InTown_Controller{
     }
   }
 
+  function show(){
+    $this->render();
+  }
+  
   function get_items(){
     $data = $this->store_model->getItems($this->place_id);
     $this->addData('data', $data);

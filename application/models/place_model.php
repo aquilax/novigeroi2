@@ -4,7 +4,29 @@ class Place_Model extends AQX_Extended_Model{
 
   protected $table_name = 'place';
 
+  
+  //FIXME db
+  function load ($id) {
+    $this->data = array(
+      'id' => 1,
+      'town_id' => 1,
+      'place_type_id' => 1,
+      'name' => 'Име на място',
+      'description' => 'Описание на място',
+    );
+  }
+  
   function getPlace($town_id, $place_id){
+    //FIXME  db
+    return array(
+      'town_id' => 1,
+      'id' => 1,
+      'place_type_id' => 1,
+      'place_type_name' => 'Болница',
+      'controller' => 'hospital',
+      'description' => 'болница на края на града',
+    );
+    
     $select = array(
       'p.town_id',
       'p.id AS id',

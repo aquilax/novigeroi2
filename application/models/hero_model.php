@@ -4,8 +4,59 @@ class Hero_model extends AQX_Extended_Model{
 
   protected $table_name = 'hero'; //hero's table;
 
+  //FIXME db
+  function load(){
+    $this->data = array(
+      'id' => 1,
+      'status' => 'town',
+      'status_ref_id' => 1,
+    );
+    return 1;
+  }
+  
+  
   //List all heroes for user
   public function getHeroes($user_id){
+    //FIXME db
+    return array (
+      0 => 
+      array (
+        'id' => '2',
+        'user_id' => '1',
+        'class_id' => '1',
+        'name' => '123',
+        'level' => '1',
+        'exp' => '1',
+        'created' => '2011-04-01 07:15:19',
+        'last_online' => '0000-00-00 00:00:00',
+        'status' => 'town',
+        'status_ref_id' => '1',
+        'map_id' => '1',
+        'map_x' => '0',
+        'map_y' => '0',
+        '_data' => '{}',
+      ),
+      1 => 
+      array (
+        'id' => '3',
+        'user_id' => '1',
+        'class_id' => '1',
+        'name' => 'цуцо',
+        'level' => '1',
+        'exp' => '1',
+        'created' => '2011-04-03 07:11:27',
+        'last_online' => '0000-00-00 00:00:00',
+        'status' => 'home',
+        'status_ref_id' => NULL,
+        'map_id' => '1',
+        'map_x' => '0',
+        'map_y' => '0',
+        '_data' => '{}',
+      ),
+    );
+    
+    
+    
     $this->db->where('user_id', $user_id);
     $this->db->order_by('created');
     $query = $this->db->get($this->table_name);
@@ -36,6 +87,15 @@ class Hero_model extends AQX_Extended_Model{
   }
 
   function getHeroClasses(){
+    //FIXME db
+    return array (
+      0 => 
+      array (
+        'id' => '1',
+        'name' => 'Варварин',
+      ),
+    );
+        
     $select = array(
       'id',
       'name',

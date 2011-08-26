@@ -5,6 +5,7 @@ class AQX_Controller extends CI_Controller{
   private $status = array('code' => 200, 'message' => 'OK');
   private $data = array();
   private $action = array();
+  protected $prefix = '';
 
   
   function __construct(){
@@ -54,7 +55,7 @@ class AQX_Controller extends CI_Controller{
 
   function addAction($controller, $message, $format = ''){
     $this->action[] = array(
-      'controller' => $controller,
+      'controller' => $this->prefix.$controller,
       'message' => $message,
       'format' => $format,
     );
@@ -70,6 +71,7 @@ class AQX_Logged_Controller extends AQX_Controller{
 
   function __construct(){
     parent::__construct();
+    $this->prefix = '/v1/';
     $this->loadCredentials();
     if (!$this->logged){
       $this->_guard();

@@ -4,6 +4,14 @@ class Store_Model extends AQX_Extended_Model{
 
   protected $table_name = 'place';
 
+  //FIXME db
+  function load($id) {
+    $this->data = array(
+        
+    );
+    return 1;
+  }
+  
   function getItems($place_id){
     $select = array(
       'item_type_id',

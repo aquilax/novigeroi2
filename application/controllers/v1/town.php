@@ -6,7 +6,7 @@ class Town extends AQX_InTown_Controller{
     parent::__construct();
     $this->load->model('town_model');
   }
-
+  
   function info(){
     $id = $this->town_model->load(array('id' => $this->town_id));
     if (!$id){

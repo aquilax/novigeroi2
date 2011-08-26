@@ -1,17 +1,5 @@
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bank_transaction` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hero_id` int(11) DEFAULT NULL,
-  `place_id` int(11) DEFAULT NULL,
-  `operation_type_id` int(11) DEFAULT NULL,
-  `gold1` int(11) DEFAULT '0',
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hero` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -26,26 +14,9 @@ CREATE TABLE `hero` (
   `map_id` int(11) NOT NULL DEFAULT '1',
   `map_x` int(11) NOT NULL DEFAULT '0',
   `map_y` int(11) NOT NULL DEFAULT '0',
-  `gold1` int(11) DEFAULT '0',
-  `gold2` int(11) DEFAULT '0',
   `_data` mediumtext,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `hero_inventory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hero_id` int(11) DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `gold1` int(11) NOT NULL,
-  `gold2` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hero_id` (`hero_id`),
-  KEY `item_id` (`item_id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -61,8 +32,7 @@ CREATE TABLE `item` (
   `single_use` int(11) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `_data` mediumtext,
-  PRIMARY KEY (`id`),
-  KEY `item_type_id` (`item_type_id`)
+  PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -77,14 +47,6 @@ CREATE TABLE `item_type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `operation_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `place` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `town_id` int(11) DEFAULT NULL,
@@ -93,9 +55,7 @@ CREATE TABLE `place` (
   `description` varchar(255) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `_data` mediumtext NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `town_id` (`town_id`),
-  KEY `place_type_id` (`place_type_id`)
+  PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -104,11 +64,7 @@ CREATE TABLE `place_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `place_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
-  `gold1` int(11) DEFAULT NULL,
-  `gold2` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `place_id` (`place_id`),
-  KEY `item_id` (`item_id`)
+  PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
