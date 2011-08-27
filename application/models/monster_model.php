@@ -10,12 +10,15 @@ class Monster_Model extends AQX_Extended_Model {
   
   //FIXME db
   function load() {
-    $this->data = array(
-      'id' => 1,
-      'name' => 'Торбалан',
-      'hp' => 30,
-      'defence' => 1
-    );
+    $this->data = $this->session->userdata($this->table_name);
+    if (!$this->data) {
+      $this->data = array(
+        'id' => 1,
+        'name' => 'Торбалан',
+        'hp' => 30,
+        'defence' => 1
+      );
+    }
     return 1;
   }
   

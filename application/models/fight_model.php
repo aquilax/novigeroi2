@@ -10,7 +10,10 @@ class Fight_Model extends AQX_Model{
   private $monster_dead = FALSE;
   private $messages = array();
   
-  public function fight(){
+  public function fight() {
+    if (!$this->canContinue()) {
+      return $this->messages;
+    }
     $cmd = $this->getCommandHero();
     if ($cmd) {
       // Da real deal
@@ -29,6 +32,15 @@ class Fight_Model extends AQX_Model{
     return $this->messages;
   }
   
+  private function canContinue(){
+    $this->monster_dead = $this->monster_model->get('hp');
+    $this->hero_dead = $this->hero_model->get('hp');
+    if ($this->monster_dead  || $this->hero_dead) {
+      return FALSE;
+    }
+    return TRUE;
+  }
+  
   private function getCommandHero(){
     return trim($this->uri->segment(4));
   }
@@ -38,7 +50,7 @@ class Fight_Model extends AQX_Model{
     return nlt($damage, 0); // no healing through hitting
   }
   
-  private function heroHit(){
+  private function heroHit(){    
     $this->messages[] = 'you hit';
     $old_hp = $this->monster_model->get('hp', 0);
     $damage = $this->hit(
@@ -63,6 +75,9 @@ class Fight_Model extends AQX_Model{
   }  
   
   private function monsterHit(){
+    if ($this->monster_dead) {
+      return;
+    }
     $this->messages[] = 'monster hit';
     $old_hp = $this->hero_model->get('hp', 0);
     $damage = $this->hit(
