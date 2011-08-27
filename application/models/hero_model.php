@@ -6,7 +6,7 @@ class Hero_model extends AQX_Extended_Model{
 
   //FIXME db
   function load(){
-    //$this->data = $this->session->userdata($this->table_name);
+    $this->data = $this->session->userdata($this->table_name);
     if (!$this->data) {
       $this->data = array(
         'id' => 1,
