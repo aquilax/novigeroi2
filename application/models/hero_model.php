@@ -6,7 +6,7 @@ class Hero_model extends AQX_Extended_Model{
 
   //FIXME db
   function load(){
-    $this->data = $this->session->userdata($this->table_name);
+    //$this->data = $this->session->userdata($this->table_name);
     if (!$this->data) {
       $this->data = array(
         'id' => 1,
@@ -22,6 +22,9 @@ class Hero_model extends AQX_Extended_Model{
         'map_id' => 1,
         'map_x' => 1,
         'map_y' => 1,
+        'hp' => 30,
+        'defence' => 2,
+        'attack' => 2,
       );
       return 1;
     }
