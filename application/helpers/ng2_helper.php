@@ -23,9 +23,13 @@ function ng2_rand($min, $max){
   return mt_rand($min, $max);
 }
 
+function chanced($num, $chance){
+  return (int)($num * (1 + (ng2_rand(0, $chance)/100)));
+}
+
 //No less than
 function nlt($num, $min){
-  return ($num < $min)?$min:$num;
+  return ($num > $min)?$num:$min;
 }
 
 function exp2level($C, $exp){
