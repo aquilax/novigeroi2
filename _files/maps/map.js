@@ -14,7 +14,7 @@ var Maps = (function(){
     fetch(hw,hh);
   }
 
-  function processData(cx, cy, data){
+  function processData(cx, cy, data, c){
     var dhh = parseInt((data.h - 1)/2);
     var dhw = parseInt((data.w - 1)/2);
     var n = 0;
@@ -27,11 +27,12 @@ var Maps = (function(){
         n++;
       }
     }
+    dorender(c)
   }
 
-  function fetch(rx, ry){
+  function fetch(rx, ry, c){
     $.getJSON('map.json', function(data){
-      processData(rx, ry, data)
+      processData(rx, ry, data, c)
     });
   }
 
@@ -39,9 +40,20 @@ var Maps = (function(){
     _queue.push(center)
   }
 
-  function qfetch(){
-    while (c = _queue.shift()) {
-      fetch(c[0], c[1]);
+  function qfetch(x,y){
+    var n, e, s, w = 0;
+    if (_queue.len() > 0) {
+      while (c = _queue.shift()) {
+        if (c[1] > s) s = c[1];
+        if (c[1] < n) n = c[1];
+        if (c[0] > e) e = c[0];
+        if (c[0] < w) w = c[0];
+      }
+      ny = s-n;
+      nx = e-w;
+      fetch(nx, ny, [x, y]);
+    } else {
+      dorender([x, y]);
     }
   }
 
@@ -49,14 +61,12 @@ var Maps = (function(){
     for (var ry = y-hh; ry < y+hh; ry++) {
       for (var rx = x-hw; rx < x+hw; rx++) {
         if ((ry in _cache) && (rx in _cache[ry])) {
-          console.log(_cache[ry][rx])
         } else {
           qpush([rx, ry]);
         }
       }
     }
-    qfetch();
-    console.log(_cache)
+    qfetch(x,y);
   }
 
   return {
