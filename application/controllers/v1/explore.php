@@ -13,6 +13,10 @@ class Explore extends AQX_InGame_Controller{
     $this->redirect('town');
   }
   
+  function move() {
+    $this->render();
+  }
+  
 }
 
 ?>

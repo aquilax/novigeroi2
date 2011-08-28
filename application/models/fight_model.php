@@ -23,12 +23,12 @@ class Fight_Model extends AQX_Model{
         default: // Cheating hurts
       }
       if ($this->hero_dead) {
-        $this->redirect = "dead";
+        $this->redirect = "fight/dead";
         return $this->messages;
       }
       $this->monsterHit(); //Monster will try to hit even if you run
       if ($this->monster_dead) {
-        $this->redirect = "vitory";
+        $this->redirect = "fight/vitory";
         return $this->messages;
       }
       $this->monster_model->save();

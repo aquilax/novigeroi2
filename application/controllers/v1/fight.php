@@ -8,7 +8,7 @@ class Fight extends AQX_InGame_Controller {
 
   function __construct() {
     parent::__construct();
-    if ($this->hero_model->get('status') != 'fight') {
+    if (substr($this->hero_model->get('status'), 0, 5) != 'fight') {
       $this->_guard();
     }
     $this->load->model('fight_model');
@@ -25,6 +25,11 @@ class Fight extends AQX_InGame_Controller {
     $this->monster_model->load(array('id' => $monster_id,
         'hero_id' => $this->hero_model->get('id')));
     $messages = $this->fight_model->fight();
+    
+    if ($this->fight_model->redirect) {
+      $this->hero_model->set('status', $this->fight_model->redirect);
+    }
+
     $this->setData(array('name' => lang('Fight'), 'message' => implode('<br />', $messages)));
     $this->addData('monster', $this->monster_model->get_array());
     $this->addAction('fight/index/hit', lang('Hit'));
@@ -32,7 +37,23 @@ class Fight extends AQX_InGame_Controller {
     $this->addAction('fight/index/run', lang('Run'));
     $this->render();
   }
+
+  /*
+   * You are dead
+   */
   
+  function dead() {
+    $this->hero_model->set('status', 'town');
+    $this->render();
+  }
+  
+  /*
+   * Monster is dead
+   */  
+  function victory() {
+    $this->hero_model->set('status', 'explore');
+    $this->render();
+  }
 }
 
 ?>

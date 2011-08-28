@@ -31,8 +31,8 @@ class Place extends AQX_InTown_Controller{
     } else {
       $this->addData('message', sprintf(lang('Healing costs %d gold'), $this->place_model->get('price', 10)));
       $this->addData('price', $this->place_model->get('price', 10));
-      $this->addAction('town', lang('Back to town'));
       $this->addAction('place/hospital_heal/'.$place_id, lang('Heal'));
+      $this->addAction('town', lang('Back to town'));
     }
     $this->render();
   }
