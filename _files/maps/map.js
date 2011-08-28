@@ -40,7 +40,7 @@ var Maps = (function(){
   }
 
   function qfetch(x,y){
-    var n, e, s, w = 0;
+    var n=0, e=0, s=0, w=0;
     if (_queue.length > 0) {
       while (c = _queue.shift()) {
         if (c[1] > s) s = c[1];
@@ -70,6 +70,7 @@ var Maps = (function(){
       b += "\n";
     }
     $('#c').html(b);
+    console.log(_cache);
   }
 
   function render(x, y){
@@ -91,7 +92,7 @@ var Maps = (function(){
 }());
 
 $(document).ready(function(){
-  Maps.init(3,3);
-  Maps.render(2,2);
+  Maps.init(5,5);
+  Maps.render(5,3);
   Maps.render(2,1);
 })
