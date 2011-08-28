@@ -11,7 +11,6 @@ var Maps = (function(){
     hw = parseInt((w-1)/2);
     h = height;
     hh = parseInt((h-1)/2);
-    fetch(hw,hh);
   }
 
   function processData(cx, cy, data, c){
@@ -42,7 +41,7 @@ var Maps = (function(){
 
   function qfetch(x,y){
     var n, e, s, w = 0;
-    if (_queue.len() > 0) {
+    if (_queue.length > 0) {
       while (c = _queue.shift()) {
         if (c[1] > s) s = c[1];
         if (c[1] < n) n = c[1];
@@ -55,6 +54,22 @@ var Maps = (function(){
     } else {
       dorender([x, y]);
     }
+  }
+
+  function dorender(c){
+    console.log(c);
+    var b = '';
+    for (var y = 0; y < 10; y++) {
+      for (var x = 0; x < 10; x++) {
+        if ((y in _cache) && (x in _cache[y])) {
+          b += _cache[y][x];
+        } else {
+          b += '.';
+        }
+      }
+      b += "\n";
+    }
+    $('#c').html(b);
   }
 
   function render(x, y){
