@@ -13,12 +13,10 @@ var Maps = (function(){
     hh = parseInt((h-1)/2);
   }
 
-  function processData(cx, cy, data, c){
-    var dhh = parseInt((data.h - 1)/2);
-    var dhw = parseInt((data.w - 1)/2);
+  function processData(wn, es, data, c){
     var n = 0;
-    for (var dy =cy-dhh; dy <= cy+dhh; dy++) {
-      for (var dx = cx-dhw; dx <= cx+dhh; dx++) {
+    for (var dy = wn[1]; dy <= es[1]; dy++) {
+      for (var dx = wn[0]; dx <= es[0]; dx++) {
         if (_cache[dy] == undefined) {
           _cache[dy] = {}
         }
@@ -29,9 +27,14 @@ var Maps = (function(){
     dorender(c)
   }
 
-  function fetch(rx, ry, c){
-    $.getJSON('map.json', function(data){
-      processData(rx, ry, data, c)
+  function genUrl(wn, es){
+    return '/v1/map/get/'+wn[0]+'/'+wn[1]+'/'+es[0]+'/'+es[1]+'';
+  }
+
+  function fetch(wn, es, c){
+    var url = genUrl(wn, es);
+    $.getJSON(url, function(data){
+      processData(wn, es, data, c)
     });
   }
 
@@ -48,9 +51,8 @@ var Maps = (function(){
         if (c[0] > e) e = c[0];
         if (c[0] < w) w = c[0];
       }
-      ny = s-n;
-      nx = e-w;
-      fetch(nx, ny, [x, y]);
+      //get fetch coordinates
+      fetch([w,n], [e,s], [x, y]);
     } else {
       dorender([x, y]);
     }
