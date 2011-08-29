@@ -6,6 +6,9 @@ var Maps = (function(){
   var h = 0;
   var hh = 0;
 
+  var render_x = 0;
+  var render_y = 0;
+  
   function init(width, height){
     w = width;
     hw = parseInt((w-1)/2);
@@ -13,7 +16,7 @@ var Maps = (function(){
     hh = parseInt((h-1)/2);
   }
 
-  function processData(wn, es, data, c){
+  function processData(wn, es, data){
     var n = 0;
     for (var dy = wn[1]; dy <= es[1]; dy++) {
       for (var dx = wn[0]; dx <= es[0]; dx++) {
@@ -31,10 +34,10 @@ var Maps = (function(){
     return '/v1/map/get/'+wn[0]+'/'+wn[1]+'/'+es[0]+'/'+es[1]+'';
   }
 
-  function fetch(wn, es, c){
+  function fetch(wn, es){
     var url = genUrl(wn, es);
     $.getJSON(url, function(data){
-      processData(wn, es, data, c)
+      processData(wn, es, data)
     });
   }
 
@@ -42,9 +45,12 @@ var Maps = (function(){
     _queue.push(center)
   }
 
-  function qfetch(x,y){
-    var n=0, e=0, s=0, w=0;
+  function qfetch(){
     if (_queue.length > 0) {
+      var n = Number.MAX_VALUE;
+      var e = Number.MIN_VALUE;
+      var s = Number.MIN_VALUE;
+      var w = Number.MAX_VALUE;      
       while (c = _queue.shift()) {
         if (c[1] > s) s = c[1];
         if (c[1] < n) n = c[1];
@@ -52,14 +58,13 @@ var Maps = (function(){
         if (c[0] < w) w = c[0];
       }
       //get fetch coordinates
-      fetch([w,n], [e,s], [x, y]);
+      fetch([w,n], [e,s]);
     } else {
-      dorender([x, y]);
+      dorender();
     }
   }
 
-  function dorender(c){
-    console.log(c);
+  function dorender(){
     var b = '';
     for (var y = 0; y < 20; y++) {
       for (var x = 0; x < 50; x++) {
@@ -75,15 +80,16 @@ var Maps = (function(){
   }
 
   function render(x, y){
+    render_x = x;
+    render_y = y;
     for (var ry = y-hh; ry < y+hh; ry++) {
       for (var rx = x-hw; rx < x+hw; rx++) {
-        if ((ry in _cache) && (rx in _cache[ry])) {
-        } else {
+        if (!(ry  in _cache) || !(rx in _cache[ry])) {
           qpush([rx, ry]);
         }
       }
     }
-    qfetch(x,y);
+    qfetch();
   }
   
   function move(coord, direction){

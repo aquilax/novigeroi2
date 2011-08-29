@@ -12,6 +12,7 @@
 class Map extends AQX_Logged_Controller{
   
   function get(){
+    $tiles = array('G', 'W', 'F', '~');
     $x1 = (int)$this->uri->segment(4);
     $y1 = (int)$this->uri->segment(5);
     $x2 = (int)$this->uri->segment(6);
@@ -20,7 +21,7 @@ class Map extends AQX_Logged_Controller{
     $b = '';
     for ($y = $y1; $y <= $y2; $y++){
       for ($x = $x1; $x <= $x2; $x++){
-        $b .= 'Z';
+        $b .= $tiles[rand(0, count($tiles)-1)];
       }
     }
     $data = array(
