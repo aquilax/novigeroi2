@@ -22,6 +22,7 @@ class Town extends AQX_InTown_Controller{
     foreach($data as $row){
       $this->addAction($row['controller'].'/'.$row['id'], $row['name']);
     }
+    $this->addAction('explore', lang('Explore'));
     $this->render();    
   }
   

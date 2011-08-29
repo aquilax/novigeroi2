@@ -92,7 +92,7 @@ var Game = (function(){
     load_div = $('#load');
     name_div = $('#title');
     //get in the action
-    get('/v1/game');
+    get('v1/game');
   }
     
   function handleAnchors (event) {

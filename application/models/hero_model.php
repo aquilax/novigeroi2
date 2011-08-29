@@ -16,12 +16,15 @@ class Hero_model extends AQX_Extended_Model{
         'exp' => '3',
         'last_online' => 0,
         'level' => 1,
-        'status' => 'town',
+        'status' => 'fight',
         'status_ref_id' => 1,
         'gold1' => 200,
         'map_id' => 1,
         'map_x' => 1,
         'map_y' => 1,
+        'hp' => 30,
+        'defence' => 2,
+        'attack' => 2,
       );
       return 1;
     }
