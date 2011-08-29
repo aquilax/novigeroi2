@@ -59,8 +59,8 @@ var Maps = (function(){
   function dorender(c){
     console.log(c);
     var b = '';
-    for (var y = 0; y < 10; y++) {
-      for (var x = 0; x < 10; x++) {
+    for (var y = 0; y < 20; y++) {
+      for (var x = 0; x < 50; x++) {
         if ((y in _cache) && (x in _cache[y])) {
           b += _cache[y][x];
         } else {
@@ -70,7 +70,6 @@ var Maps = (function(){
       b += "\n";
     }
     $('#c').html(b);
-    console.log(_cache);
   }
 
   function render(x, y){
@@ -84,15 +83,36 @@ var Maps = (function(){
     }
     qfetch(x,y);
   }
+  
+  function move(coord, direction){
+    //init coordinates with the old ones
+    var nx = coord[0];
+    var ny = coord[1];
+    switch (direction){
+      case 'n': ny--; break;
+      case 'e': nx++; break;
+      case 's': ny++; break;
+      case 'w': nx--; break;
+    }
+    render(nx, ny);
+    return [nx, ny];
+  }
 
   return {
     init: init,
-    render: render
+    render: render,
+    move: move
   }
 }());
 
+var coord = [8,6];
+
 $(document).ready(function(){
   Maps.init(5,5);
-  Maps.render(5,3);
-  Maps.render(2,1);
+  Maps.render(coord[0], coord[1]);
+  $('.b').click(function(event){
+    coord = Maps.move(coord, $(event.target).attr('rel'));
+    event.preventDefault();
+  })
+  
 })
