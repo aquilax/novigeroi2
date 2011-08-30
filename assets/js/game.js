@@ -1,6 +1,7 @@
 var Game = (function(){
   
   var log_div = null;
+  var debug_div = null;
   var load_div = null;
   var actions_div = null;
   var hero_div = null;
@@ -34,7 +35,7 @@ var Game = (function(){
 
   function log(data) {
     var ts = new Date().toString();
-    log_div.prepend('['+ts+'] '+recp(data)+'<br/>');
+   debug_div.prepend('['+ts+'] '+recp(data)+'<br/>');
   }
 
   function processActions(action) {
@@ -54,6 +55,14 @@ var Game = (function(){
     hero_div.html(t);    
   }
 
+  function renderData(data){
+    var tmpl = data.hero.status;
+    if (typeof(templates[tmpl]) == "undefined"){
+      tmpl = 'default'
+    }
+    main_div.html(Mustache.to_html(templates[tmpl], prepare[tmpl](data)))
+  }
+
   function processData(data) {
     if (data.name){
       name_div.html(data.name);
@@ -62,8 +71,8 @@ var Game = (function(){
       main_div.html(data.description);
     }
     if (data.message){ 
-      main_div.html(data.message);
-    }    
+      log_div.append(data.message);
+    }
   }
 
   function processResponse(raw) {
@@ -81,11 +90,15 @@ var Game = (function(){
     if (raw.hero){
       processHero(raw.hero)
     }    
-    wait(false);
+    if (raw.hero.status){
+      renderData(raw);
+    }
+   wait(false);
   }
 
   function initGame(){
     log_div = $('#log');
+    debug_div = $('#debug');
     actions_div = $('#actions');
     hero_div = $('#hero');
     main_div = $('#main');
@@ -113,7 +126,7 @@ var Game = (function(){
 $(document).ready(function(){
   $("a").live('click', Game.handleAnchors);
   Game.init();
-  $("#log").ajaxError(function(event, request, settings){
+  $("#debug").ajaxError(function(event, request, settings){
     $(this).prepend("Error requesting page " + settings.url + "<br />");
   });
 });
