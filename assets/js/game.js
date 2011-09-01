@@ -35,7 +35,7 @@ var Game = (function(){
 
   function log(data) {
     var ts = new Date().toString();
-   debug_div.prepend('['+ts+'] '+recp(data)+'<br/>');
+    debug_div.prepend('['+ts+'] '+recp(data)+'<br/>');
   }
 
   function processActions(action) {
