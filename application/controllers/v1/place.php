@@ -29,8 +29,8 @@ class Place extends AQX_InTown_Controller{
     if(!$id){
       $this->setStatus(404, 'Place not found');       
     } else {
-      $this->addData('message', sprintf(lang('Healing costs %d gold'), $this->place_model->get('price', 10)));
-      $this->addData('price', $this->place_model->get('price', 10));
+      $this->addMain('description', sprintf(lang('Healing costs %d gold'), $this->place_model->get('price', 10)));
+      $this->addMain('price', $this->place_model->get('price', 10));
       $this->addAction('place/hospital_heal/'.$place_id, lang('Heal'));
       $this->addAction('town', lang('Back to town'));
     }
@@ -48,7 +48,7 @@ class Place extends AQX_InTown_Controller{
     } else {
       if ($this->hero_model->get('HP') == $this->hero_model->get('HP_max')
         && $this->hero_model->get('MP') == $this->hero_model->get('MP_max')) {
-        $this->addData('message', lang('No need to heal'));
+        $this->addLog(lang('No need to heal'));
       } else {
         $price = $this->place_model->get('price', 10); //default to 10 GOLD;
         if ($this->hero_model->get('gold', 0) - $price < 0){

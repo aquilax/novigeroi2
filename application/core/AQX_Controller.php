@@ -3,9 +3,12 @@
 class AQX_Controller extends CI_Controller{
 
   private $status = array('code' => 200, 'message' => 'OK');
-  private $data = array();
-  private $action = array();
+  private $main = array();
+  private $act = array();
+  private $sub_act = array();
+  private $title = 'Page Title';
   private $hero = array();
+  private $log = array();
   protected $prefix = '';
   protected $_data = array();
 
@@ -35,11 +38,14 @@ class AQX_Controller extends CI_Controller{
     $this->_beforeRender();
     $this->_data = array(
       'status' => $this->status,
-      'action' => $this->action,
-      'data' => $this->data,
+      'act' => $this->act,
+      'sub_act' => $this->sub_act,
+      'title' => $this->title,
+      'hero' => $this->hero,
+      'log' => $this->log,
+      'main' => $this->main,
     );
     $this->fillHero();
-    $this->output->set_status_header($this->status['code'], $this->status['message']);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($this->_data));
   }
@@ -49,22 +55,34 @@ class AQX_Controller extends CI_Controller{
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode(array('redirect' => $this->prefix.$controller)));
   }  
+
+  function setTitle($title){
+    $this->title = $title;
+  }
   
   function setStatus($code, $message){
     $this->status['code'] = $code;
     $this->status['message'] = $message;
   }
 
-  function setData($data){
-    $this->data = $data;
+  function setHero($data){
+    $this->hero = $data;
+  }
+  
+  function setMain($data){
+    $this->main = $data;
   }
 
-  function addData($key, $val){
-    $this->data[$key] = $val;
+  function addMain($key, $val){
+    $this->main[$key] = $val;
   }
 
+  function addLog($text){
+    $this->log[] = $text;
+  }  
+  
   function addAction($controller, $message, $format = ''){
-    $this->action[] = array(
+    $this->act[] = array(
       'controller' => $this->prefix.$controller,
       'message' => $message,
       'format' => $format,

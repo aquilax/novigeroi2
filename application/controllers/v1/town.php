@@ -12,18 +12,16 @@ class Town extends AQX_InTown_Controller{
     if (!$id){
       $this->setStatus(404, lang('Town not found'));
     }
-    $this->setData(array(
-      'id' => $this->town_model->get('id'),
-      'name' => $this->town_model->get('name'),
-      'description' => $this->town_model->get('description', ''),
-    ));
+    $this->setTitle($this->town_model->get('name'));
+    $this->addMain('description', $this->town_model->get('description', ''));
+    $this->addMain('id', $this->town_model->get('id'));
     
     $data = $this->town_model->getPlaces($this->town_id); 
     foreach($data as $row){
       $this->addAction($row['controller'].'/'.$row['id'], $row['name']);
     }
     $this->addAction('explore', lang('Explore'));
-    $this->render();    
+    $this->render();
   }
   
   function info(){

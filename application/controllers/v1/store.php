@@ -18,7 +18,7 @@ class Store extends AQX_InTown_Controller{
   }
 
   function show(){
-    $this->setData($this->store_model->get_array());
+    $this->setMain($this->store_model->get_array());
     $this->addAction('town', lang('Back to town')); 
     $this->render();
   }

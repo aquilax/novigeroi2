@@ -9,7 +9,7 @@ var GTmpl = (function(){
       if (typeof(_cache[id]) != 'undefined'){
         _cache[id].html(data[id]);
       } else {
-        var el = $('#'+id);
+        var el = target_el.find('#'+id);
         if (typeof(el) != 'undefined'){
           _cache[id] = el;
           el.html(data[id]);
@@ -59,7 +59,6 @@ var Game = (function(){
   var actions_div = null;
   var hero_div = null;
   var name_div = null;
-  var main_div = null;
   
   function wait(show){
     if (show){
@@ -109,9 +108,6 @@ var Game = (function(){
   }
 
   function processData(data) {
-    if (data.name){
-      name_div.html(data.name);
-    }
     if (data.message){ 
       log_div.append(data.message);
     }
@@ -120,7 +116,7 @@ var Game = (function(){
   function templateProcess(data){
     switch (data.hero.status) {
       case 'fight': return {};
-      default: return {'description' : data.data.description};
+      default: return data.main;
     }
   }
 
@@ -130,11 +126,16 @@ var Game = (function(){
       get(raw.redirect);
       return;
     }
-    if (raw.action){
-      processActions(raw.action)
+    if (raw.title){
+      name_div.html(raw.title)
+    }    
+    if (raw.act){
+      processActions(raw.act)
     }
-    if (raw.data){
-      processData(raw.data)
+    if (raw.log){
+      for (i in raw.log){
+        log_div.append(raw.log[i]);
+      }
     }
     if (raw.hero){
       processHero(raw.hero)
@@ -148,7 +149,7 @@ var Game = (function(){
   function initGame(){
     log_div = $('#log');
     debug_div = $('#debug');
-    actions_div = $('#actions');
+    actions_div = $('#act');
     hero_div = $('#hero');
     main_div = $('#main');
     load_div = $('#load');
