@@ -25,9 +25,9 @@ class Casino extends AQX_InTown_Controller{
   
   function head_tails(){
     $max_bet = $this->casino_model->get('max_bet', 10);
-    $this->addData('name', $this->casino_model->get('title'));
-    $this->addData('description', $this->casino_model->get('description'));
-    $this->addData('max_bet', $max_bet);
+    $this->setTitle($this->casino_model->get('title'));
+    $this->addMain('description', $this->casino_model->get('description'));
+    $this->addMain('max_bet', $max_bet);
     
     $max_bet = $this->casino_model->get('max_bet', 10);
     $n = (int)($max_bet /5);
@@ -50,12 +50,13 @@ class Casino extends AQX_InTown_Controller{
     } elseif ($bet < 1) {
       $this->setStatus(500, 'Bet underflow');
     } else {
-      $data = $this->casino_model->bet($bet, $chance);
-      if ($data){
-        $this->setData($data);
+      $win = $this->casino_model->bet($bet, $chance);
+      if ($win > 0){
+        $this->addLog(sprintf(lang('You won %d gold'), $win));
+      } elseif ($win < 0) {
+        $this->addLog(sprintf(lang('You lost %d gold'), abs($win)));
       } else {
-        $this->setStatus($this->hero_model->status['code'],
-          $this->hero_model->status['message']);
+        $this->addLog(lang('Not enough money'));
       }
     }
     $this->addAction('casino/head_tails/'.$this->place_id, lang('Bet again'));

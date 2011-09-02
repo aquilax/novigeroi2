@@ -30,8 +30,24 @@ class Fight extends AQX_InGame_Controller {
       $this->hero_model->set('status', $this->fight_model->redirect);
     }
 
-    $this->setData(array('name' => lang('Fight'), 'message' => implode('<br />', $messages)));
-    $this->addData('monster', $this->monster_model->get_array());
+    $this->setTitle(lang('Fight'));
+    foreach ($messages as $m){
+      $this->addLog($m);
+    }
+    //Monster
+    $this->addMain('m_name', $this->monster_model->get('name'));
+    $this->addMain('m_hp', $this->monster_model->get('hp', 0));
+    $this->addMain('m_mp', $this->monster_model->get('mp', 0));
+    $this->addMain('m_attack', $this->monster_model->get('attack', 0));
+    $this->addMain('m_defence', $this->monster_model->get('defence', 0));
+    //Hero
+    $this->addMain('h_name', $this->hero_model->get('name'));
+    $this->addMain('h_hp', $this->hero_model->get('hp', 0));
+    $this->addMain('h_mp', $this->hero_model->get('mp', 0));
+    $this->addMain('h_attack', $this->hero_model->get('attack', 0));
+    $this->addMain('h_defence', $this->hero_model->get('defence', 0));
+    
+    //$this->addData('monster', $this->monster_model->get_array());
     $this->addAction('fight/index/hit', lang('Hit'));
     $this->addAction('fight/index/spell', lang('Spell'));
     $this->addAction('fight/index/run', lang('Run'));

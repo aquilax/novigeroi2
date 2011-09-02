@@ -19,16 +19,16 @@ class Casino_Model extends AQX_Extended_Model{
   function bet($bet, $chance){
     $gold1 = $this->hero_model->get('gold1', 0);
     if (($gold1 - $bet) < 0){
-      return array('message' => lang('Not enough money'));
+      return 0;
     }
     $dice = ng2_rand(0, 100);
     if ($dice < $chance){
       $win = $bet;
       $this->hero_model->set('gold1', $gold1 + $win);
-      return array('message' => sprintf(lang('You won %d gold'), ($win*2)));
+      return $win;
     } else {
       $this->hero_model->set('gold1', $gold1 - $bet);
-      return array('message' => sprintf(lang('You lost %d gold'), $bet));
+      return -$bet;
     }
   }  
 }

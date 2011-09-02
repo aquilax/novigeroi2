@@ -115,7 +115,7 @@ var Game = (function(){
 
   function templateProcess(data){
     switch (data.hero.status) {
-      case 'fight': return {};
+      case 'fight': return data.main;
       default: return data.main;
     }
   }
@@ -134,7 +134,7 @@ var Game = (function(){
     }
     if (raw.log){
       for (i in raw.log){
-        log_div.append(raw.log[i]);
+        log_div.prepend("<li>"+raw.log[i]+"</li>");
       }
     }
     if (raw.hero){
