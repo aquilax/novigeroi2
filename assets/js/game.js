@@ -1,3 +1,56 @@
+var GTmpl = (function(){
+
+  var target_el = null;
+  var last_template = null;
+  var _cache = {};
+
+  function populate(data){
+    for (id in data){
+      if (typeof(_cache[id]) != 'undefined'){
+        _cache[id].html(data[id]);
+      } else {
+        var el = $('#'+id);
+        if (typeof(el) != 'undefined'){
+          _cache[id] = el;
+          el.html(data[id]);
+        }
+      }
+    }
+  }
+
+  function init(target) {
+    target_el = $(target);
+  }
+
+  function getTemplate(template) {
+    if (typeof(tmpl[template]) == "undefined"){
+      template = 'default';
+    }
+    return tmpl[template];
+  }
+
+  function render(data, template, target) {
+    var rtarget;
+    if (typeof(target) != 'undefined'){
+      rtarget = $(target);
+    } else {
+      rtarget = target_el
+    }
+    if (template != last_template){
+      // render template
+      rtarget.html(getTemplate(template));
+      _cache = {}
+    }
+    populate(data);
+    last_template = template;
+  }
+
+  return {
+    init: init,
+    render: render
+  };
+}());
+
 var Game = (function(){
   
   var log_div = null;
@@ -55,23 +108,19 @@ var Game = (function(){
     hero_div.html(t);    
   }
 
-  function renderData(data){
-    var tmpl = data.hero.status;
-    if (typeof(templates[tmpl]) == "undefined"){
-      tmpl = 'default'
-    }
-    main_div.html(Mustache.to_html(templates[tmpl], prepare[tmpl](data)))
-  }
-
   function processData(data) {
     if (data.name){
       name_div.html(data.name);
     }
-    if (data.description){ 
-      main_div.html(data.description);
-    }
     if (data.message){ 
       log_div.append(data.message);
+    }
+  }
+
+  function templateProcess(data){
+    switch (data.hero.status) {
+      case 'fight': return {};
+      default: return {'description' : data.data.description};
     }
   }
 
@@ -91,9 +140,9 @@ var Game = (function(){
       processHero(raw.hero)
     }    
     if (raw.hero.status){
-      renderData(raw);
+      GTmpl.render(templateProcess(raw), raw.hero.status)
     }
-   wait(false);
+    wait(false);
   }
 
   function initGame(){
@@ -104,6 +153,7 @@ var Game = (function(){
     main_div = $('#main');
     load_div = $('#load');
     name_div = $('#title');
+    GTmpl.init('#main');
     //get in the action
     get('v1/game');
   }

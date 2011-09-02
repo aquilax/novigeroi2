@@ -31,7 +31,7 @@ foreach($files as $file){
   if (!in_array($file, array('.', '..'))){
     $t = preg_replace(array_keys($repl), array_values($repl), file_get_contents($dir.$file));
     $key = basename($file, '.html');
-    printf("  tmpl['%s'] = '%s';\n", $key, $t);
+    printf("tmpl['%s'] = '%s';\n", $key, $t);
   }
 }
 
