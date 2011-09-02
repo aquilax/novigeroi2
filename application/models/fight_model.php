@@ -28,7 +28,7 @@ class Fight_Model extends AQX_Model{
       }
       $this->monsterHit(); //Monster will try to hit even if you run
       if ($this->monster_dead) {
-        $this->redirect = "fight/vitory";
+        $this->redirect = "fight/victory";
         return $this->messages;
       }
       $this->monster_model->save();

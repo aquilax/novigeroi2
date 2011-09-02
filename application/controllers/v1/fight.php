@@ -67,6 +67,9 @@ class Fight extends AQX_InGame_Controller {
    * Monster is dead
    */  
   function victory() {
+    $this->setTitle(lang('Victory'));
+    $this->setMain(lang('Such a glorious victory'));
+    $this->addAction('explore', lang('Explore'));
     $this->hero_model->set('status', 'explore');
     $this->render();
   }
