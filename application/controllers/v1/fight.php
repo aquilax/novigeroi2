@@ -72,6 +72,9 @@ class Fight extends AQX_InGame_Controller {
     $this->setTitle(lang('Victory'));
     $this->addMain('description', lang('Such a glorious victory'));
     $this->addAction('explore', lang('Explore'));
+    $this->load->model('monster_model');
+    $monster_id = $this->hero_model->get('status_ref_id');
+    $this->monster_model->killMonster($monster_id);
     $this->hero_model->set('status', 'explore');
     $this->render();
   }

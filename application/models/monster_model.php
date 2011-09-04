@@ -16,7 +16,8 @@ class Monster_Model extends AQX_Extended_Model {
         'id' => 1,
         'name' => 'Торбалан',
         'hp' => 30,
-        'defence' => 1
+        'defence' => ng2_rand(1, 5),
+        'attack' => ng2_rand(1, 5)
       );
     }
     return 1;
@@ -27,6 +28,9 @@ class Monster_Model extends AQX_Extended_Model {
     $this->session->set_userdata($this->table_name, $this->data);
   }
     
+  function killMonster($id){
+    $this->session->unset_userdata($this->table_name);
+  }
   
   function createMonster() {
     return 1;
