@@ -29,6 +29,7 @@ class Place extends AQX_InTown_Controller{
     if(!$id){
       $this->setStatus(404, 'Place not found');       
     } else {
+      $this->setTitle($this->place_model->get('name'));
       $this->addMain('description', sprintf(lang('Healing costs %d gold'), $this->place_model->get('price', 10)));
       $this->addMain('price', $this->place_model->get('price', 10));
       $this->addAction('place/hospital_heal/'.$place_id, lang('Heal'));

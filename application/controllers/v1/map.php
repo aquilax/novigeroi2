@@ -29,7 +29,7 @@ class Map extends AQX_Logged_Controller{
       'w' => $x2 -$x1,
       'h' => $y2 -$y1,
     );
-    $this->setData($data);
+    //$this->setMain($data);
     $this->output->set_content_type('application/json');
     $this->output->set_output(json_encode($data));    
   }

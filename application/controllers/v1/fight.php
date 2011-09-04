@@ -28,6 +28,8 @@ class Fight extends AQX_InGame_Controller {
     
     if ($this->fight_model->redirect) {
       $this->hero_model->set('status', $this->fight_model->redirect);
+      $this->redirect($this->fight_model->redirect);
+      return;
     }
 
     $this->setTitle(lang('Fight'));
@@ -68,7 +70,7 @@ class Fight extends AQX_InGame_Controller {
    */  
   function victory() {
     $this->setTitle(lang('Victory'));
-    $this->setMain(lang('Such a glorious victory'));
+    $this->addMain('description', lang('Such a glorious victory'));
     $this->addAction('explore', lang('Explore'));
     $this->hero_model->set('status', 'explore');
     $this->render();

@@ -18,6 +18,7 @@ class Casino extends AQX_InTown_Controller{
   }
  
   function show(){
+    $this->setTitle($this->casino_model->get('name'));
     $this->addAction('casino/head_tails/'.$this->place_id, lang('Head or tails'));
     $this->addAction('town', lang('Back to town'));    
     $this->render();
