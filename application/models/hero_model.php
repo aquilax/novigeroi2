@@ -23,8 +23,8 @@ class Hero_model extends AQX_Extended_Model{
         'map_x' => 1,
         'map_y' => 1,
         'hp' => 30,
-        'defence' => 2,
-        'attack' => 2,
+        'defence' => ng2_rand(2, 10),
+        'attack' => ng2_rand(2, 10),
       );
       return 1;
     }
@@ -229,6 +229,10 @@ class Hero_model extends AQX_Extended_Model{
     return FALSE;
   }
 
+  function killHero(){
+    unset($this->data);
+  }
+  
 }
 
 ?>

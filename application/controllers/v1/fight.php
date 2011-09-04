@@ -61,7 +61,11 @@ class Fight extends AQX_InGame_Controller {
    */
   
   function dead() {
+    $this->setTitle(lang('Beaten'));
+    $this->addMain('description', lang('Unfortunately you are badly injured'));
+    $this->hero_model->killHero();
     $this->hero_model->set('status', 'town');
+    $this->addAction('town', lang('Back to town'));
     $this->render();
   }
   

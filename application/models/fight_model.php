@@ -22,15 +22,18 @@ class Fight_Model extends AQX_Model{
         case 'run' : if ($this->heroRun()) return $this->messages; break;
         default: // Cheating hurts
       }
+      $this->monsterHit(); //Monster will try to hit even if you run
+      
       if ($this->hero_dead) {
         $this->redirect = "fight/dead";
         return $this->messages;
-      }
-      $this->monsterHit(); //Monster will try to hit even if you run
+      }      
+      
       if ($this->monster_dead) {
         $this->redirect = "fight/victory";
         return $this->messages;
       }
+      
       $this->monster_model->save();
     } else {
       // User's turn no command given show status
