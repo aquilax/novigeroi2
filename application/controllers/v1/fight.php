@@ -59,7 +59,6 @@ class Fight extends AQX_InGame_Controller {
   /*
    * You are dead
    */
-  
   function dead() {
     $this->setTitle(lang('Beaten'));
     $this->addMain('description', lang('Unfortunately you are badly injured'));

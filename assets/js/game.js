@@ -65,25 +65,26 @@ var Maps = (function(){
   }
 
   function dorender(){
-    var b = '';
-    for (var y = 0; y < 20; y++) {
-      for (var x = 0; x < 50; x++) {
-        if ((y in _cache) && (x in _cache[y])) {
-          b += _cache[y][x];
+    var c = '';
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var ry = (render_y-hh)+y;
+        var rx = (render_x-hw)+x;
+        if ((ry in _cache) && (rx in _cache[ry])) {
+          c = _cache[ry][rx];
         } else {
-          b += '.';
+          c = '.';
         }
+        $('#map').find('#c_'+x+'_'+y).html(c);
       }
-      b += "\n";
     }
-    $('#c').html(b);
   }
 
   function render(x, y){
     render_x = x;
     render_y = y;
-    for (var ry = y-hh; ry < y+hh; ry++) {
-      for (var rx = x-hw; rx < x+hw; rx++) {
+    for (var ry = y-hh; ry < y+hh+1; ry++) {
+      for (var rx = x-hw; rx < x+hw+1; rx++) {
         if (!(ry  in _cache) || !(rx in _cache[ry])) {
           qpush([rx, ry]);
         }
