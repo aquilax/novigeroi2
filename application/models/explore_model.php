@@ -21,7 +21,7 @@ class Explore_model extends AQX_Model{
   
   function inFight($x, $y) {
     $chance = $this->hero_model->get('chance_to_fight', 0);
-    $add = ng2_rand(0, 50);
+    $add = ng2_rand(0, 10);
     if ($chance + $add > 100){
       $this->hero_model->set('chance_to_fight', 0);
       $this->hero_model->set('status', 'fight');

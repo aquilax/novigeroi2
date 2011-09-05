@@ -21,7 +21,17 @@ class Map extends AQX_Logged_Controller{
     $b = '';
     for ($y = $y1; $y <= $y2; $y++){
       for ($x = $x1; $x <= $x2; $x++){
-        $b .= $tiles[rand(0, count($tiles)-1)];
+        $res = sin(deg2rad($x*10))+sin(deg2rad($y*10));
+        if ($res < -1){
+          $b .= '~';
+        } elseif($res < 0){
+          $b .= '.';
+        } elseif($res < 1){
+          $b .= '*';
+        } else {
+          $b .= '^';
+        }
+        //$b .= $tiles[rand(0, count($tiles)-1)];
       }
     }
     $data = array(
