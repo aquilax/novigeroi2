@@ -19,6 +19,10 @@ class Store extends AQX_InTown_Controller{
 
   function show(){
     $this->setMain($this->store_model->get_array());
+    $data = $this->store_model->getItems($this->place_id);
+    foreach($data as $row){
+      $this->addAction('store/buy/'.$this->place_id.'/'.$row['id'], $row['item_name']); 
+    }    
     $this->addAction('town', lang('Back to town')); 
     $this->render();
   }
@@ -34,18 +38,14 @@ class Store extends AQX_InTown_Controller{
 
   function buy(){
     $item_id = (int)$this->uri->segment(5);
-    $this->hero_model->buy_store($this->place_id, $item_id);
-    $this->setStatus($this->hero_model->status['code'],
-      $this->hero_model->status['message']);
+    $this->store_model->buyItem($this->place_id, $item_id);
     $this->render();
   }
 
   function sell(){
     $inventory_id = (int)$this->uri->segment(5);
     $store_margin = (float)$this->store_model->get('margin', .8);
-    $this->hero_model->sell_store($store_margin, $inventory_id);
-    $this->setStatus($this->hero_model->status['code'],
-      $this->hero_model->status['message']);
+    $this->store_model->sellItem($store_margin, $inventory_id);
     $this->render();
   }
 

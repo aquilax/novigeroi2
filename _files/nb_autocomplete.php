@@ -17,8 +17,7 @@
 * @property World_Model world_model.php
 */
 
-class CI_Controller {
-
-}
+class CI_Controller {}
+class CI_MOdel {}
 
 ?>

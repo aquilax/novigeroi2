@@ -298,6 +298,6 @@ $(document).ready(function(){
   $("a").live('click', Game.handleAnchors);
   Game.init();
   $("#debug").ajaxError(function(event, request, settings){
-    $(this).prepend("Error requesting page " + settings.url + "<br />");
+    $(this).prepend("Error requesting page <a target='_blank' href='"+settings.url+"'>" + settings.url + "</a><br />");
   });
 });

@@ -78,7 +78,7 @@ class Fight extends AQX_InGame_Controller {
     $this->load->model('monster_model');
     $monster_id = $this->hero_model->get('status_ref_id');
     $this->monster_model->killMonster($monster_id);
-    $this->hero_model->set('status', 'explore');
+    $this->hero_model->setHeroStatus('explore', 0);
     $this->render();
   }
 }

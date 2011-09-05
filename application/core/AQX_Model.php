@@ -66,8 +66,11 @@ class AQX_Extended_Model extends AQX_Model{
     return $default;
   }
 
-  public function get_array(){
-    return $this->data;  
+  public function get_array($type = FALSE){
+    switch($type){
+      case 'update': return $this->update;
+      default: return $this->data;
+    }
   }
 
   public function set_array($data){

@@ -12,7 +12,6 @@ class Explore_model extends AQX_Model{
   }
   
   function getActions($x, $y){
-    //POS is Point of significance;
     if ($x == 5 && $y == 5){
       return array(array('id' => 1, 'message' => lang('Enter town')));
     }
@@ -34,8 +33,7 @@ class Explore_model extends AQX_Model{
   
   function action($place_id){
     //FIXME: Check and set correct place
-    $this->hero_model->set('status', 'town');
-    $this->hero_model->set('status_ref_id', 1);
+    $this->hero_model->setHeroStatus('town', 1);
     return 'town';
   }
   
