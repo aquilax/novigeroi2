@@ -15,9 +15,6 @@ class Explore extends AQX_InGame_Controller{
     $this->addAction('explore/move/s', lang('South'));
     $this->addAction('explore/move/w', lang('West'));
     $this->render();
-  
-//    $this->hero_model->set('status_ref_id', '1');
-//    $this->redirect('town');
   }
   
   function move() {
