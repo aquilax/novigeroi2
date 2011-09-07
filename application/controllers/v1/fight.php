@@ -18,7 +18,7 @@ class Fight extends AQX_InGame_Controller {
     $monster_id = $this->hero_model->get('status_ref_id');
     $this->load->model('monster_model');
     if (!$monster_id) {
-      $monster_id = $this->fight_model->createMonster();
+      $monster_id = $this->monster_model->createMonster();
       $this->hero_model->set('status_ref_id', $monster_id);
     }
     //Prevents monster hijacking

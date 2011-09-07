@@ -48,14 +48,14 @@ var Maps = (function(){
   function qfetch(){
     if (_queue.length > 0) {
       var n = Number.MAX_VALUE;
-      var e = Number.MIN_VALUE;
-      var s = Number.MIN_VALUE;
+      var e = -Number.MAX_VALUE;
+      var s = -Number.MAX_VALUE;
       var w = Number.MAX_VALUE;      
       while (c = _queue.shift()) {
-        if (c[1] > s) s = c[1];
-        if (c[1] < n) n = c[1];
-        if (c[0] > e) e = c[0];
-        if (c[0] < w) w = c[0];
+        if (c[1] > s) { s = c[1] };
+        if (c[1] < n) { n = c[1] };
+        if (c[0] > e) { e = c[0] };
+        if (c[0] < w) { w = c[0] };
       }
       //get fetch coordinates
       fetch([w,n], [e,s]);
